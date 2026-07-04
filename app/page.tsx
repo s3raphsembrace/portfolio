@@ -112,17 +112,8 @@ const PROJECTS: {
   context: string;
   bullets: string[];
   tags: ProjectTag[];
+  pdf?: string;
 }[] = [
-  {
-    name: "Mutual Fund Calculator",
-    stack: "Java Spring Boot · Angular · Python · PostgreSQL · Gemini API",
-    context: "Goldman Sachs ELS 2026",
-    bullets: [
-      "Full-stack investment predictor computing projected returns using CAPM and Fama-French models, integrating Yahoo Finance, FRED Treasury, and Newton Analytics APIs across 48 mutual funds and 20 bond funds.",
-      "Seeded a PostgreSQL database with bond fund regression coefficients via a Python pipeline; added a Gemini AI chatbot with tool-calling for live projections and guardrailed recommendations, backed by JUnit tests.",
-    ],
-    tags: ["SWE", "AI/ML", "Finance"],
-  },
   {
     name: "Multi-Modal Evidence Review",
     stack: "Gemini API SDK · PyYAML · Pillow · tenacity · tqdm",
@@ -134,24 +125,15 @@ const PROJECTS: {
     tags: ["AI/ML", "SWE"],
   },
   {
-    name: "Sprout",
-    stack: "React · Vite · Node.js · Express · PostgreSQL · OpenAI API",
-    context: "Healthcare Innovation Challenge 2026",
+    name: "Mutual Fund Calculator",
+    stack: "Java Spring Boot · Angular · Python · PostgreSQL · Gemini API",
+    context: "Goldman Sachs ELS 2026",
     bullets: [
-      "Built an AI-driven web app converting daily mood check-ins and journal entries into personalized recovery micro-tasks for users with substance use disorder via the OpenAI API.",
-      "Implemented JWT auth, row-level data security, and a real-time relapse-risk classification pipeline; presented to a panel of healthcare judges.",
+      "Full-stack investment predictor computing projected returns using CAPM and Fama-French models, integrating Yahoo Finance, FRED Treasury, and Newton Analytics APIs across 48 mutual funds and 20 bond funds.",
+      "Seeded a PostgreSQL database with bond fund regression coefficients via a Python pipeline; added a Gemini AI chatbot with tool-calling for live projections and guardrailed recommendations, backed by JUnit tests.",
     ],
-    tags: ["SWE", "AI/ML", "Biomedical"],
-  },
-  {
-    name: "Mon Sillage",
-    stack: "Next.js · React · Tailwind CSS · Google Gemini API",
-    context: "L'Oréal Brandstorm 2026",
-    bullets: [
-      "Developed an AI-powered fragrance recommendation app integrating Gemini API to analyze outfit images, weather, and preferences for scent and application guidance.",
-      "Designed a multi-step discovery journey and proposed a circular refillable-vessel model using PCR glass (−30% CO₂), aligned with L'Oréal's 2030 sustainability goals.",
-    ],
-    tags: ["SWE", "AI/ML"],
+    tags: ["SWE", "AI/ML", "Finance"],
+    pdf: "/projects/mutual-fund-calculator.pdf",
   },
   {
     name: "Guitarverse",
@@ -164,6 +146,16 @@ const PROJECTS: {
     tags: ["SWE"],
   },
   {
+    name: "Sprout",
+    stack: "React · Vite · Node.js · Express · PostgreSQL · OpenAI API",
+    context: "Healthcare Innovation Challenge 2026",
+    bullets: [
+      "Built an AI-driven web app converting daily mood check-ins and journal entries into personalized recovery micro-tasks for users with substance use disorder via the OpenAI API.",
+      "Implemented JWT auth, row-level data security, and a real-time relapse-risk classification pipeline; presented to a panel of healthcare judges.",
+    ],
+    tags: ["SWE", "AI/ML", "Biomedical"],
+  },
+  {
     name: "Surgical Hand-Tracking Robotic Arm",
     stack: "Fusion 360 · Arduino · C++ · Python · MediaPipe",
     context: "Emergent Biodesign 2026",
@@ -172,6 +164,17 @@ const PROJECTS: {
       "Programmed Arduino firmware in C++ with per-joint safety validation and incremental 3° motion steps — preserving continuous surgeon judgment in the control loop.",
     ],
     tags: ["Hardware", "AI/ML", "Biomedical"],
+  },
+  {
+    name: "Mon Sillage",
+    stack: "Next.js · React · Tailwind CSS · Google Gemini API",
+    context: "L'Oréal Brandstorm 2026",
+    bullets: [
+      "Developed an AI-powered fragrance recommendation app integrating Gemini API to analyze outfit images, weather, and preferences for scent and application guidance.",
+      "Designed a multi-step discovery journey and proposed a circular refillable-vessel model using PCR glass (−30% CO₂), aligned with L'Oréal's 2030 sustainability goals.",
+    ],
+    tags: ["SWE", "AI/ML"],
+    pdf: "/projects/mon-sillage.pdf",
   },
   {
     name: "PCA & Clustering Pipeline",
@@ -206,9 +209,9 @@ const SKILLS: Record<string, string[]> = {
 const MARQUEE_SKILLS = ["Python", "React", "Next.js", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "OpenAI API", "Gemini API", "Docker", "MediaPipe", "SciPy", "Three.js", "MongoDB", "LabVIEW", "Fusion 360"];
 
 const POSTERS = [
-  { title: "Developing a Thermoplastic Device Capable of Partitioning Samples for dPCR", venue: "SBU URECA Symposium, 2026" },
-  { title: "A Piezoelectric-Driven High-Throughput Microfluidic Platform for Optimizing Biomanufacturing for Cell-Based Immunotherapy", venue: "VIP Program Symposium, 2026" },
-  { title: "Generation & Validation of a Mechanical Bidirectional Sweep Signal to Bolster Human T-Cell Proliferation for Cancer Immunotherapy", venue: "VIP Program Symposium, 2025" },
+  { title: "Developing a Thermoplastic Device Capable of Partitioning Samples for dPCR", venue: "SBU URECA Symposium, 2026", pdf: "/posters/dpcr-thermoplastic-poster.pdf" },
+  { title: "A Piezoelectric-Driven High-Throughput Microfluidic Platform for Optimizing Biomanufacturing for Cell-Based Immunotherapy", venue: "VIP Program Symposium, 2026", pdf: "/posters/piezoelectric-microfluidic-poster.pdf" },
+  { title: "Generation & Validation of a Mechanical Bidirectional Sweep Signal to Bolster Human T-Cell Proliferation for Cancer Immunotherapy", venue: "VIP Program Symposium, 2025", pdf: "/posters/sweep-signal-poster.pdf" },
 ];
 
 const LEADERSHIP = [
@@ -389,7 +392,7 @@ export default function Home() {
               Get In Touch
             </a>
             <div className="flex items-center gap-1 ml-2">
-              <a href="https://linkedin.com/in/matthewkuan" target="_blank" rel="noopener noreferrer"
+              <a href="https://linkedin.com/in/matt-kuan" target="_blank" rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:text-accent hover:border-accent transition-colors text-sm font-medium">in</a>
               <a href="https://github.com/s3raphsembrace" target="_blank" rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:text-accent hover:border-accent transition-colors">
@@ -495,13 +498,18 @@ export default function Home() {
           </h3>
           <div className="flex flex-col gap-3">
             {POSTERS.map((p) => (
-              <div key={p.title} className="flex gap-4 items-start p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-accent/30 transition-colors">
-                <div className="w-8 h-8 rounded-lg bg-accent-soft flex items-center justify-center shrink-0 text-accent text-sm font-bold">P</div>
-                <div>
-                  <p className="text-slate-800 text-sm font-medium leading-snug">{p.title}</p>
+              <a key={p.title} href={p.pdf} target="_blank" rel="noopener noreferrer"
+                className="group flex gap-4 items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-accent/40 hover:bg-white hover:shadow-lg hover:shadow-accent/5 transition-all">
+                <div className="w-9 h-9 rounded-lg bg-accent-soft flex items-center justify-center shrink-0 text-accent text-sm font-bold group-hover:bg-accent group-hover:text-white transition-colors">P</div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-slate-800 text-sm font-medium leading-snug group-hover:text-accent transition-colors">{p.title}</p>
                   <p className="text-slate-400 text-xs mt-1">{p.venue}</p>
                 </div>
-              </div>
+                <span className="shrink-0 text-xs font-medium text-slate-400 group-hover:text-accent flex items-center gap-1 transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0">
+                  View PDF
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </span>
+              </a>
             ))}
           </div>
         </div>
@@ -563,8 +571,15 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-5">
           {filteredProjects.map((p) => (
             <div key={p.name} className="card reveal flex flex-col group">
-              <div className="flex justify-between items-start mb-1">
+              <div className="flex justify-between items-start gap-2 mb-1">
                 <h3 className="text-slate-900 font-bold group-hover:text-accent transition-colors">{p.name}</h3>
+                {p.pdf && (
+                  <a href={p.pdf} target="_blank" rel="noopener noreferrer"
+                    className="shrink-0 inline-flex items-center gap-1 text-xs font-semibold text-accent bg-accent-soft/60 border border-accent/20 px-2.5 py-1 rounded-lg hover:bg-accent hover:text-white transition-colors">
+                    Slides
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                  </a>
+                )}
               </div>
               <p className="text-slate-400 text-xs font-mono mb-2 leading-relaxed">{p.stack}</p>
               <p className="text-accent/70 text-xs mb-3 font-medium">{p.context}</p>
@@ -640,7 +655,7 @@ export default function Home() {
               {[
                 { label: "Email", value: "matthew.kuan@stonybrook.edu", href: "mailto:matthew.kuan@stonybrook.edu" },
                 { label: "Phone", value: "(347) 479-4729", href: "tel:3474794729" },
-                { label: "LinkedIn", value: "linkedin.com/in/matthewkuan", href: "https://linkedin.com/in/matthewkuan" },
+                { label: "LinkedIn", value: "linkedin.com/in/matt-kuan", href: "https://linkedin.com/in/matt-kuan" },
                 { label: "GitHub", value: "github.com/s3raphsembrace", href: "https://github.com/s3raphsembrace" },
               ].map((c) => (
                 <a key={c.label} href={c.href}
