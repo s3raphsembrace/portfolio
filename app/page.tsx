@@ -115,107 +115,107 @@ const PROJECTS: {
   pdf?: string;
   repo?: string;
 }[] = [
-  {
-    name: "Multi-Modal Evidence Review",
-    stack: "Gemini API SDK · PyYAML · Pillow · tenacity · tqdm",
-    context: "HackerRank Orchestrate 2026 · #85 / 1773",
-    bullets: [
-      "Built a two-stage multimodal pipeline (Gemini vision) to adjudicate insurance-style damage claims across cars, laptops, and packages — classifying image evidence as supporting, contradicting, or insufficient.",
-      "Designed a cheap Stage-1 validity gate (Flash-Lite) screening for blur and wrong-object issues before expensive Stage-2 analysis, cutting cost to ~$0.001/claim while improving flag reliability, with a macro-F1 evaluation harness.",
-    ],
-    tags: ["AI/ML", "SWE"],
-    repo: "https://github.com/s3raphsembrace/orchestrate",
-  },
-  {
-    name: "Mutual Fund Calculator",
-    stack: "Java Spring Boot · Angular · Python · PostgreSQL · Gemini API",
-    context: "Goldman Sachs ELS 2026",
-    bullets: [
-      "Full-stack investment predictor computing projected returns using CAPM and Fama-French models, integrating Yahoo Finance, FRED Treasury, and Newton Analytics APIs across 48 mutual funds and 20 bond funds.",
-      "Seeded a PostgreSQL database with bond fund regression coefficients via a Python pipeline; added a Gemini AI chatbot with tool-calling for live projections and guardrailed recommendations, backed by JUnit tests.",
-    ],
-    tags: ["SWE", "AI/ML", "Finance"],
-    pdf: "/projects/mutual-fund-calculator.pdf",
-    repo: "https://github.com/dpjojan/GS-ELS",
-  },
-  {
-    name: "Guitarverse",
-    stack: "Next.js · Three.js · MongoDB · Docker · Demucs · basic-pitch",
-    context: "HopperHacks WiCS 2026",
-    bullets: [
-      "Built a gamified guitar practice platform with real-time pitch detection, MIDI import, and 3D tab visualization (Three.js + React Three Fiber).",
-      "Integrated Demucs for audio stem separation via a Dockerized Python backend; built NextAuth, campaign modes, and a MongoDB-backed leaderboard.",
-    ],
-    tags: ["SWE"],
-    repo: "https://github.com/aycow/guitar_site",
-  },
-  {
-    name: "Sprout",
-    stack: "React · Vite · Node.js · Express · PostgreSQL · OpenAI API",
-    context: "Healthcare Innovation Challenge 2026",
-    bullets: [
-      "Built an AI-driven web app converting daily mood check-ins and journal entries into personalized recovery micro-tasks for users with substance use disorder via the OpenAI API.",
-      "Implemented JWT auth, row-level data security, and a real-time relapse-risk classification pipeline; presented to a panel of healthcare judges.",
-    ],
-    tags: ["SWE", "AI/ML", "Biomedical"],
-    pdf: "/projects/sprout.pdf",
-    repo: "https://github.com/env1ou5/rehabilitatetomodachi2",
-  },
-  {
-    name: "Surgical Hand-Tracking Robotic Arm",
-    stack: "Fusion 360 · Arduino · C++ · Python · MediaPipe",
-    context: "Emergent Biodesign 2026",
-    bullets: [
-      "Built a Python vision-control pipeline (MediaPipe) mapping real-time hand pose to Braccio arm joint angles and gripper commands, with a dual-hand reset trigger to minimize noise.",
-      "Programmed Arduino firmware in C++ with per-joint safety validation and incremental 3° motion steps — preserving continuous surgeon judgment in the control loop.",
-    ],
-    tags: ["Hardware", "AI/ML", "Biomedical"],
-    pdf: "/projects/braccio-arm.pdf",
-    repo: "https://github.com/s3raphsembrace/mediapipe-braccio-control",
-  },
-  {
-    name: "Mon Sillage",
-    stack: "Next.js · React · Tailwind CSS · Google Gemini API",
-    context: "L'Oréal Brandstorm 2026",
-    bullets: [
-      "Developed an AI-powered fragrance recommendation app integrating Gemini API to analyze outfit images, weather, and preferences for scent and application guidance.",
-      "Designed a multi-step discovery journey and proposed a circular refillable-vessel model using PCR glass (−30% CO₂), aligned with L'Oréal's 2030 sustainability goals.",
-    ],
-    tags: ["SWE", "AI/ML"],
-    pdf: "/projects/mon-sillage.pdf",
-    repo: "https://github.com/s3raphsembrace/mon-sillage",
-  },
-  {
-    name: "PCA & Clustering Pipeline",
-    stack: "Python · NumPy · Pandas · Matplotlib",
-    context: "Stony Brook University",
-    bullets: [
-      "Implemented PCA for dimensionality reduction and applied DBSCAN and K-Means clustering with heat-map visualizations to identify structure and validate data accuracy.",
-    ],
-    tags: ["AI/ML", "Biomedical"],
-  },
-  {
-    name: "Narcolepsy Monitoring Headband",
-    stack: "Fusion 360 · AutoCAD · EEG Concept Design",
-    context: "ART × BME Interdisciplinary Design 2026",
-    bullets: [
-      "Collaborated with a fine arts student to prototype a wearable EEG-based pediatric narcolepsy monitoring headband in Fusion 360, iterating on a non-circular 20 cm profile to resolve sizing and geometry failures across print cycles.",
-      "Proposed integration of EEG electrodes, signal amplifiers, Bluetooth modules, and onboard storage for real-time brainwave monitoring and wireless transmission to a caregiver companion app.",
-    ],
-    tags: ["Hardware", "Biomedical"],
-    pdf: "/projects/narcolepsy-headband.pdf",
-  },
-  {
-    name: "Noninvasive Heart Rate Sensor",
-    stack: "C++ · Arduino · Fusion 360",
-    context: "Stony Brook University",
-    bullets: [
-      "Directed a 7-person team through iterative design and prototyping of a wearable sensor; earned Best Presentation Award for exceptional technical communication.",
-    ],
-    tags: ["Hardware", "Biomedical"],
-    pdf: "/projects/heart-rate-sensor.pdf",
-  },
-];
+    {
+      name: "Multi-Modal Evidence Review",
+      stack: "Gemini API SDK · PyYAML · Pillow · tenacity · tqdm",
+      context: "HackerRank Orchestrate 2026 · #85 / 1773",
+      bullets: [
+        "Built a two-stage multimodal pipeline (Gemini vision) to adjudicate insurance-style damage claims across cars, laptops, and packages — classifying image evidence as supporting, contradicting, or insufficient.",
+        "Designed a cheap Stage-1 validity gate (Flash-Lite) screening for blur and wrong-object issues before expensive Stage-2 analysis, cutting cost to ~$0.001/claim while improving flag reliability, with a macro-F1 evaluation harness.",
+      ],
+      tags: ["AI/ML", "SWE"],
+      repo: "https://github.com/s3raphsembrace/orchestrate",
+    },
+    {
+      name: "Mutual Fund Calculator",
+      stack: "Java Spring Boot · Angular · Python · PostgreSQL · Gemini API",
+      context: "Goldman Sachs ELS 2026",
+      bullets: [
+        "Full-stack investment predictor computing projected returns using CAPM and Fama-French models, integrating Yahoo Finance, FRED Treasury, and Newton Analytics APIs across 48 mutual funds and 20 bond funds.",
+        "Seeded a PostgreSQL database with bond fund regression coefficients via a Python pipeline; added a Gemini AI chatbot with tool-calling for live projections and guardrailed recommendations, backed by JUnit tests.",
+      ],
+      tags: ["SWE", "AI/ML", "Finance"],
+      pdf: "/projects/mutual-fund-calculator.pdf",
+      repo: "https://github.com/dpjojan/GS-ELS",
+    },
+    {
+      name: "Guitarverse",
+      stack: "Next.js · Three.js · MongoDB · Docker · Demucs · basic-pitch",
+      context: "HopperHacks WiCS 2026",
+      bullets: [
+        "Built a gamified guitar practice platform with real-time pitch detection, MIDI import, and 3D tab visualization (Three.js + React Three Fiber).",
+        "Integrated Demucs for audio stem separation via a Dockerized Python backend; built NextAuth, campaign modes, and a MongoDB-backed leaderboard.",
+      ],
+      tags: ["SWE"],
+      repo: "https://github.com/aycow/guitar_site",
+    },
+    {
+      name: "Sprout",
+      stack: "React · Vite · Node.js · Express · PostgreSQL · OpenAI API",
+      context: "Healthcare Innovation Challenge 2026",
+      bullets: [
+        "Built an AI-driven web app converting daily mood check-ins and journal entries into personalized recovery micro-tasks for users with substance use disorder via the OpenAI API.",
+        "Implemented JWT auth, row-level data security, and a real-time relapse-risk classification pipeline; presented to a panel of healthcare judges.",
+      ],
+      tags: ["SWE", "AI/ML", "Biomedical"],
+      pdf: "/projects/sprout.pdf",
+      repo: "https://github.com/env1ou5/rehabilitatetomodachi2",
+    },
+    {
+      name: "Surgical Hand-Tracking Robotic Arm",
+      stack: "Fusion 360 · Arduino · C++ · Python · MediaPipe",
+      context: "Emergent Biodesign 2026",
+      bullets: [
+        "Built a Python vision-control pipeline (MediaPipe) mapping real-time hand pose to Braccio arm joint angles and gripper commands, with a dual-hand reset trigger to minimize noise.",
+        "Programmed Arduino firmware in C++ with per-joint safety validation and incremental 3° motion steps — preserving continuous surgeon judgment in the control loop.",
+      ],
+      tags: ["Hardware", "AI/ML", "Biomedical"],
+      pdf: "/projects/braccio-arm.pdf",
+      repo: "https://github.com/s3raphsembrace/mediapipe-braccio-control",
+    },
+    {
+      name: "Mon Sillage",
+      stack: "Next.js · React · Tailwind CSS · Google Gemini API",
+      context: "L'Oréal Brandstorm 2026",
+      bullets: [
+        "Developed an AI-powered fragrance recommendation app integrating Gemini API to analyze outfit images, weather, and preferences for scent and application guidance.",
+        "Designed a multi-step discovery journey and proposed a circular refillable-vessel model using PCR glass (−30% CO₂), aligned with L'Oréal's 2030 sustainability goals.",
+      ],
+      tags: ["SWE", "AI/ML"],
+      pdf: "/projects/mon-sillage.pdf",
+      repo: "https://github.com/s3raphsembrace/mon-sillage",
+    },
+    {
+      name: "PCA & Clustering Pipeline",
+      stack: "Python · NumPy · Pandas · Matplotlib",
+      context: "Stony Brook University",
+      bullets: [
+        "Implemented PCA for dimensionality reduction and applied DBSCAN and K-Means clustering with heat-map visualizations to identify structure and validate data accuracy.",
+      ],
+      tags: ["AI/ML", "Biomedical"],
+    },
+    {
+      name: "Narcolepsy Monitoring Headband",
+      stack: "Fusion 360 · AutoCAD · EEG Concept Design",
+      context: "ART × BME Interdisciplinary Design 2026",
+      bullets: [
+        "Collaborated with a fine arts student to prototype a wearable EEG-based pediatric narcolepsy monitoring headband in Fusion 360, iterating on a non-circular 20 cm profile to resolve sizing and geometry failures across print cycles.",
+        "Proposed integration of EEG electrodes, signal amplifiers, Bluetooth modules, and onboard storage for real-time brainwave monitoring and wireless transmission to a caregiver companion app.",
+      ],
+      tags: ["Hardware", "Biomedical"],
+      pdf: "/projects/narcolepsy-headband.pdf",
+    },
+    {
+      name: "Noninvasive Heart Rate Sensor",
+      stack: "C++ · Arduino · Fusion 360",
+      context: "Stony Brook University",
+      bullets: [
+        "Directed a 7-person team through iterative design and prototyping of a wearable sensor; earned Best Presentation Award for exceptional technical communication.",
+      ],
+      tags: ["Hardware", "Biomedical"],
+      pdf: "/projects/heart-rate-sensor.pdf",
+    },
+  ];
 
 const SKILLS: Record<string, string[]> = {
   "Languages": ["Python", "Java", "TypeScript", "JavaScript", "HTML5", "CSS3", "SQL", "C", "C++", "LabVIEW"],
@@ -386,9 +386,8 @@ export default function Home() {
 
       {/* ── NAV ─────────────────────────────────────────────────────────── */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white/80 backdrop-blur-lg border-b border-slate-200 shadow-sm" : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-lg border-b border-slate-200 shadow-sm" : "bg-transparent"
+          }`}
       >
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="#home" className="text-slate-900 font-bold text-base tracking-tight font-mono">
@@ -471,7 +470,7 @@ export default function Home() {
                 className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:text-accent hover:border-accent transition-colors text-sm font-medium">in</a>
               <a href="https://github.com/s3raphsembrace" target="_blank" rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:text-accent hover:border-accent transition-colors">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" /></svg>
               </a>
             </div>
           </div>
@@ -520,27 +519,17 @@ export default function Home() {
           {/* Bio */}
           <div className="reveal space-y-4">
             <p className="text-slate-700 text-base leading-relaxed">
-              I&apos;m a Brooklyn-born engineer and builder studying Biomedical Engineering and Applied
-              Mathematics at Stony Brook University, with a minor in Finance. What drives me is the loop of
-              <span className="text-slate-900 font-medium"> building something real, finding exactly where it breaks, and fixing the root cause</span> —
-              whether that&apos;s a thermoplastic microfluidic device misbehaving in a cleanroom, a signal
-              pipeline flagging noisy accelerometer data, or a full-stack app that needs to feel effortless
-              to the person using it.
-            </p>
-            <p className="text-slate-700 text-base leading-relaxed">
-              My interests sit deliberately at the intersection of disciplines. I&apos;ve fabricated dPCR
-              devices for genomics research, engineered vibration hardware for cancer immunotherapy studies,
-              built AI-driven web apps for healthcare and finance, and modeled real-estate private equity
-              deals. I like being the person who can move between the lab bench, the codebase, and the
-              pitch deck — and translate between them. I studied abroad at Yonsei University in Seoul, which
+              Hello! I am a sophomore at Stony Brook University double majoring in Biomedical Engineering and Applied Mathematics & Statistics. I'm interested in biotechnology, data-driven research, and solving complex problems. I enjoy learning new skills across disciplines, and I'm always open to opportunities that help me grow technically and professionally.
+              Feel free to connect with me and contact me at matthew.kuan@stonybrook.edu.
+              I studied abroad at Yonsei University in Seoul, which
               sharpened how I adapt and communicate across very different environments.
             </p>
             <p className="text-slate-700 text-base leading-relaxed">
-              Outside of work, I&apos;m usually moving. I picked up <span className="text-slate-900 font-medium">bouldering</span> and
+              Outside of work, I&apos;m usually moving. I picked up bouldering and
               love heading out for outdoor climbs around the city — the climbing community is easily one of
-              the most welcoming I&apos;ve found. I <span className="text-slate-900 font-medium">skateboard</span> at
+              the most welcoming I&apos;ve found. I skateboard at
               the local skate park through the summer, and I spent high school managing a
-              <span className="text-slate-900 font-medium"> PSAL varsity fencing team</span>, which taught me
+              PSAL varsity fencing team, which taught me
               a lot about logistics, showing up for people, and keeping a group organized under pressure.
               Curiosity is the common thread through all of it — I&apos;m happiest when I&apos;m learning
               something new and figuring out how it fits together.
@@ -644,7 +633,7 @@ export default function Home() {
                 </div>
                 <span className="shrink-0 text-xs font-medium text-slate-400 group-hover:text-accent flex items-center gap-1 transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0">
                   View PDF
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                 </span>
               </a>
             ))}
@@ -696,11 +685,10 @@ export default function Home() {
         <div className="flex flex-wrap gap-2 mb-8 reveal">
           {filters.map((f) => (
             <button key={f} onClick={() => setActiveFilter(f)}
-              className={`text-sm px-4 py-1.5 rounded-full border font-medium transition-all duration-200 ${
-                activeFilter === f
+              className={`text-sm px-4 py-1.5 rounded-full border font-medium transition-all duration-200 ${activeFilter === f
                   ? "bg-slate-900 text-white border-slate-900"
                   : "border-slate-200 text-slate-500 hover:border-accent hover:text-accent"
-              }`}>
+                }`}>
               {f}
             </button>
           ))}
@@ -714,7 +702,7 @@ export default function Home() {
                   {p.repo && (
                     <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} code`}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 border border-slate-200 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" /></svg>
                       Code
                     </a>
                   )}
@@ -722,7 +710,7 @@ export default function Home() {
                     <a href={p.pdf} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} slides`}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-accent bg-accent-soft/60 border border-accent/20 px-2 py-1 rounded-lg hover:bg-accent hover:text-white transition-colors">
                       Slides
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                     </a>
                   )}
                 </div>
