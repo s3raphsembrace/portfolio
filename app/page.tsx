@@ -136,6 +136,7 @@ const PROJECTS: {
     ],
     tags: ["SWE", "AI/ML", "Finance"],
     pdf: "/projects/mutual-fund-calculator.pdf",
+    repo: "https://github.com/dpjojan/GS-ELS",
   },
   {
     name: "Guitarverse",
@@ -218,12 +219,10 @@ const PROJECTS: {
 
 const SKILLS: Record<string, string[]> = {
   "Languages": ["Python", "Java", "TypeScript", "JavaScript", "HTML5", "CSS3", "SQL", "C", "C++", "LabVIEW"],
-  "Frameworks & Libraries": ["React", "Next.js", "Node.js", "Express", "Spring Boot", "Angular", "Tailwind CSS", "Pandas", "NumPy", "SciPy", "Scikit-learn", "Jupyter"],
-  "Cloud & Data": ["AWS", "Docker", "Git", "MongoDB", "PostgreSQL", "REST APIs", "JWT Auth"],
-  "ML & Statistics": ["PCA", "K-Means", "DBSCAN", "Linear/Logistic Regression", "Paired t-test", "Power Analysis", "IBM SPSS"],
-  "Bioinformatics": ["DAVID", "Panther DB", "EPI2ME", "Nextflow", "SnapGene"],
-  "Design & Tools": ["Fusion 360", "AutoCAD", "CHITUBOX", "Bambu Studio", "Canva", "Adobe Express", "Photoshop"],
-  "Lab Techniques": ["SU-8 Photolithography", "Hot Embossing", "UV Bonding", "Oxygen Plasma", "Fluorescent Microscopy", "ImageJ", "RT-PCR", "Western Blotting", "ELISA"],
+  "Frameworks & Libraries": ["React", "Next.js", "Node.js", "Express", "Spring Boot", "Angular", "Tailwind CSS", "Pandas", "NumPy", "Jupyter"],
+  "Cloud & Data": ["AWS", "Docker", "Git", "MongoDB", "PostgreSQL"],
+  "Design & Tools": ["Fusion 360", "AutoCAD", "CHITUBOX", "Bambu Studio", "Canva", "Adobe Express", "Photoshop", "IBM SPSS"],
+  "Bioinformatics & Lab Techniques": ["DAVID", "Panther DB", "EPI2ME", "Nextflow", "SnapGene", "SU-8 Photolithography", "Hot Embossing", "UV Bonding", "Oxygen Plasma", "Fluorescent Microscopy", "ImageJ", "RT-PCR", "Western Blotting", "ELISA"],
 };
 
 // Maps a skill/tech name → Devicon icon path (served from jsDelivr CDN).
@@ -257,6 +256,8 @@ const ICON_MAP: Record<string, string> = {
   "PostgreSQL": "postgresql/postgresql-original",
   "Matplotlib": "matplotlib/matplotlib-original",
   "Three.js": "threejs/threejs-original",
+  "Canva": "canva/canva-original",
+  "Photoshop": "photoshop/photoshop-plain",
 };
 
 function iconUrl(name: string): string | null {
@@ -276,12 +277,14 @@ const LEADERSHIP = [
     org: "Alpha Eta Mu Beta (AEMB) Honor Society",
     role: "Website Developer, Elective Board",
     date: "Apr 2026 – Present",
+    icon: "🏅",
     desc: "Maintain the organization's website and social presence; design digital and print marketing materials in Canva & Adobe Express, driving increased event participation across departments.",
   },
   {
     org: "NYC PSAL Varsity Fencing Team",
     role: "Athletic Team Manager",
     date: "Sep 2022 – Jul 2024",
+    icon: "🤺",
     desc: "Directed end-to-end logistics, equipment management, and event coordination for a competitive roster of 20+ athletes across local and regional tournaments.",
   },
 ];
@@ -388,7 +391,7 @@ export default function Home() {
         }`}
       >
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#about" className="text-slate-900 font-bold text-base tracking-tight font-mono">
+          <a href="#home" className="text-slate-900 font-bold text-base tracking-tight font-mono">
             MK<span className="text-accent">.</span>
           </a>
           <div className="hidden md:flex items-center gap-8">
@@ -423,7 +426,7 @@ export default function Home() {
 
       {/* ── HERO ────────────────────────────────────────────────────────── */}
       <section
-        id="about"
+        id="home"
         ref={heroRef}
         className="relative min-h-screen flex flex-col justify-center overflow-hidden"
         style={{
@@ -452,12 +455,7 @@ export default function Home() {
             style={{ animationDelay: "0.35s" }}>
             Rising junior at <span className="text-slate-900 font-medium">Stony Brook University</span> studying{" "}
             <span className="text-slate-900 font-medium">Biomedical Engineering & Applied Mathematics</span> (GPA 3.72),
-            minoring in Finance. I build at the intersection of biology, signal processing, and software —
-            from thermoplastic microfluidic devices in a cleanroom to full-stack AI web apps. Interested in{" "}
-            <span className="text-accent font-medium">SWE</span>,{" "}
-            <span className="text-accent font-medium">Bioinformatics</span>,{" "}
-            <span className="text-accent font-medium">Quant Finance</span>, and{" "}
-            <span className="text-accent font-medium">Pharma R&D</span>.
+            minoring in Finance. I build at the intersection of biology, signal processing, and software.
           </p>
           <div className="flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "0.45s" }}>
             <a href="#projects"
@@ -496,6 +494,68 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* ── ABOUT ME ────────────────────────────────────────────────────── */}
+      <section id="about" className="max-w-5xl mx-auto px-6 py-20">
+        <SectionHeading label="Who I Am" title="About Me" />
+        <div className="grid md:grid-cols-[300px_1fr] gap-10 items-start">
+          {/* Photo */}
+          <div className="reveal">
+            <div className="relative group">
+              <div className="absolute -inset-2 bg-gradient-to-tr from-accent/30 to-indigo-300/30 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition-opacity" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/me.jpg"
+                alt="Matthew Kuan"
+                className="relative w-full aspect-[3/4] object-cover rounded-3xl border border-slate-200 shadow-lg"
+              />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2 justify-center">
+              {["🧗 Bouldering", "🛹 Skating", "🤺 Fencing", "✈️ Seoul '25"].map((f) => (
+                <span key={f} className="text-xs text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-full">{f}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Bio */}
+          <div className="reveal space-y-4">
+            <p className="text-slate-700 text-base leading-relaxed">
+              I&apos;m a Brooklyn-born engineer and builder studying Biomedical Engineering and Applied
+              Mathematics at Stony Brook University, with a minor in Finance. What drives me is the loop of
+              <span className="text-slate-900 font-medium"> building something real, finding exactly where it breaks, and fixing the root cause</span> —
+              whether that&apos;s a thermoplastic microfluidic device misbehaving in a cleanroom, a signal
+              pipeline flagging noisy accelerometer data, or a full-stack app that needs to feel effortless
+              to the person using it.
+            </p>
+            <p className="text-slate-700 text-base leading-relaxed">
+              My interests sit deliberately at the intersection of disciplines. I&apos;ve fabricated dPCR
+              devices for genomics research, engineered vibration hardware for cancer immunotherapy studies,
+              built AI-driven web apps for healthcare and finance, and modeled real-estate private equity
+              deals. I like being the person who can move between the lab bench, the codebase, and the
+              pitch deck — and translate between them. I studied abroad at Yonsei University in Seoul, which
+              sharpened how I adapt and communicate across very different environments.
+            </p>
+            <p className="text-slate-700 text-base leading-relaxed">
+              Outside of work, I&apos;m usually moving. I picked up <span className="text-slate-900 font-medium">bouldering</span> and
+              love heading out for outdoor climbs around the city — the climbing community is easily one of
+              the most welcoming I&apos;ve found. I <span className="text-slate-900 font-medium">skateboard</span> at
+              the local skate park through the summer, and I spent high school managing a
+              <span className="text-slate-900 font-medium"> PSAL varsity fencing team</span>, which taught me
+              a lot about logistics, showing up for people, and keeping a group organized under pressure.
+              Curiosity is the common thread through all of it — I&apos;m happiest when I&apos;m learning
+              something new and figuring out how it fits together.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a href="#projects" className="btn-shine bg-slate-900 text-white font-medium px-5 py-2.5 rounded-xl hover:bg-accent transition-colors text-sm">
+                See My Work
+              </a>
+              <a href="#contact" className="border border-slate-300 text-slate-700 font-medium px-5 py-2.5 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm">
+                Reach Out
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── EDUCATION ───────────────────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-6 py-20">
@@ -692,10 +752,10 @@ export default function Home() {
           {Object.entries(SKILLS).map(([category, skills]) => (
             <div key={category} className="card reveal">
               <p className="text-slate-900 font-bold text-sm mb-3">{category}</p>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-2">
                 {skills.map((s) => (
-                  <span key={s} className="inline-flex items-center gap-1.5 text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md border border-transparent hover:bg-white hover:border-accent/30 hover:text-accent transition-colors">
-                    <SkillIcon name={s} size={14} />{s}
+                  <span key={s} className="inline-flex items-center gap-2 text-sm bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-transparent hover:bg-white hover:border-accent/30 hover:text-accent transition-colors">
+                    <SkillIcon name={s} size={20} />{s}
                   </span>
                 ))}
               </div>
@@ -710,11 +770,16 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-5 mb-8">
           {LEADERSHIP.map((l) => (
             <div key={l.org} className="card reveal">
-              <div className="flex justify-between items-start mb-1">
-                <p className="text-slate-900 font-bold">{l.org}</p>
+              <div className="flex items-start gap-4 mb-2">
+                <div className="w-12 h-12 rounded-xl bg-accent-soft flex items-center justify-center shrink-0 text-2xl border border-accent/20">
+                  {l.icon}
+                </div>
+                <div>
+                  <p className="text-slate-900 font-bold leading-snug">{l.org}</p>
+                  <p className="text-accent text-sm font-semibold">{l.role}</p>
+                  <p className="text-slate-400 text-xs">{l.date}</p>
+                </div>
               </div>
-              <p className="text-accent text-sm font-semibold mb-1">{l.role}</p>
-              <p className="text-slate-400 text-xs mb-3">{l.date}</p>
               <p className="text-slate-600 text-sm">{l.desc}</p>
             </div>
           ))}
