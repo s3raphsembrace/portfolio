@@ -113,6 +113,7 @@ const PROJECTS: {
   bullets: string[];
   tags: ProjectTag[];
   pdf?: string;
+  repo?: string;
 }[] = [
   {
     name: "Multi-Modal Evidence Review",
@@ -123,6 +124,7 @@ const PROJECTS: {
       "Designed a cheap Stage-1 validity gate (Flash-Lite) screening for blur and wrong-object issues before expensive Stage-2 analysis, cutting cost to ~$0.001/claim while improving flag reliability, with a macro-F1 evaluation harness.",
     ],
     tags: ["AI/ML", "SWE"],
+    repo: "https://github.com/s3raphsembrace/orchestrate",
   },
   {
     name: "Mutual Fund Calculator",
@@ -144,6 +146,7 @@ const PROJECTS: {
       "Integrated Demucs for audio stem separation via a Dockerized Python backend; built NextAuth, campaign modes, and a MongoDB-backed leaderboard.",
     ],
     tags: ["SWE"],
+    repo: "https://github.com/aycow/guitar_site",
   },
   {
     name: "Sprout",
@@ -154,6 +157,8 @@ const PROJECTS: {
       "Implemented JWT auth, row-level data security, and a real-time relapse-risk classification pipeline; presented to a panel of healthcare judges.",
     ],
     tags: ["SWE", "AI/ML", "Biomedical"],
+    pdf: "/projects/sprout.pdf",
+    repo: "https://github.com/env1ou5/rehabilitatetomodachi2",
   },
   {
     name: "Surgical Hand-Tracking Robotic Arm",
@@ -164,6 +169,8 @@ const PROJECTS: {
       "Programmed Arduino firmware in C++ with per-joint safety validation and incremental 3° motion steps — preserving continuous surgeon judgment in the control loop.",
     ],
     tags: ["Hardware", "AI/ML", "Biomedical"],
+    pdf: "/projects/braccio-arm.pdf",
+    repo: "https://github.com/s3raphsembrace/mediapipe-braccio-control",
   },
   {
     name: "Mon Sillage",
@@ -175,6 +182,7 @@ const PROJECTS: {
     ],
     tags: ["SWE", "AI/ML"],
     pdf: "/projects/mon-sillage.pdf",
+    repo: "https://github.com/s3raphsembrace/mon-sillage",
   },
   {
     name: "PCA & Clustering Pipeline",
@@ -186,6 +194,17 @@ const PROJECTS: {
     tags: ["AI/ML", "Biomedical"],
   },
   {
+    name: "Narcolepsy Monitoring Headband",
+    stack: "Fusion 360 · AutoCAD · EEG Concept Design",
+    context: "ART × BME Interdisciplinary Design 2026",
+    bullets: [
+      "Collaborated with a fine arts student to prototype a wearable EEG-based pediatric narcolepsy monitoring headband in Fusion 360, iterating on a non-circular 20 cm profile to resolve sizing and geometry failures across print cycles.",
+      "Proposed integration of EEG electrodes, signal amplifiers, Bluetooth modules, and onboard storage for real-time brainwave monitoring and wireless transmission to a caregiver companion app.",
+    ],
+    tags: ["Hardware", "Biomedical"],
+    pdf: "/projects/narcolepsy-headband.pdf",
+  },
+  {
     name: "Noninvasive Heart Rate Sensor",
     stack: "C++ · Arduino · Fusion 360",
     context: "Stony Brook University",
@@ -193,20 +212,58 @@ const PROJECTS: {
       "Directed a 7-person team through iterative design and prototyping of a wearable sensor; earned Best Presentation Award for exceptional technical communication.",
     ],
     tags: ["Hardware", "Biomedical"],
+    pdf: "/projects/heart-rate-sensor.pdf",
   },
 ];
 
 const SKILLS: Record<string, string[]> = {
-  "Languages": ["Python", "Java", "TypeScript", "JavaScript", "HTML/CSS", "SQL", "C", "C++", "LabVIEW"],
+  "Languages": ["Python", "Java", "TypeScript", "JavaScript", "HTML5", "CSS3", "SQL", "C", "C++", "LabVIEW"],
   "Frameworks & Libraries": ["React", "Next.js", "Node.js", "Express", "Spring Boot", "Angular", "Tailwind CSS", "Pandas", "NumPy", "SciPy", "Scikit-learn", "Jupyter"],
-  "Cloud & Data": ["AWS (PostgreSQL RDS)", "Docker", "Git", "MongoDB", "PostgreSQL", "REST APIs", "JWT Auth"],
+  "Cloud & Data": ["AWS", "Docker", "Git", "MongoDB", "PostgreSQL", "REST APIs", "JWT Auth"],
   "ML & Statistics": ["PCA", "K-Means", "DBSCAN", "Linear/Logistic Regression", "Paired t-test", "Power Analysis", "IBM SPSS"],
   "Bioinformatics": ["DAVID", "Panther DB", "EPI2ME", "Nextflow", "SnapGene"],
   "Design & Tools": ["Fusion 360", "AutoCAD", "CHITUBOX", "Bambu Studio", "Canva", "Adobe Express", "Photoshop"],
   "Lab Techniques": ["SU-8 Photolithography", "Hot Embossing", "UV Bonding", "Oxygen Plasma", "Fluorescent Microscopy", "ImageJ", "RT-PCR", "Western Blotting", "ELISA"],
 };
 
-const MARQUEE_SKILLS = ["Python", "React", "Next.js", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "OpenAI API", "Gemini API", "Docker", "MediaPipe", "SciPy", "Three.js", "MongoDB", "LabVIEW", "Fusion 360"];
+// Maps a skill/tech name → Devicon icon path (served from jsDelivr CDN).
+// Anything not listed simply renders without a logo.
+const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
+const ICON_MAP: Record<string, string> = {
+  "Python": "python/python-original",
+  "Java": "java/java-original",
+  "TypeScript": "typescript/typescript-original",
+  "JavaScript": "javascript/javascript-original",
+  "HTML5": "html5/html5-original",
+  "CSS3": "css3/css3-original",
+  "C": "c/c-original",
+  "C++": "cplusplus/cplusplus-original",
+  "React": "react/react-original",
+  "Next.js": "nextjs/nextjs-original",
+  "Node.js": "nodejs/nodejs-original",
+  "Express": "express/express-original",
+  "Spring Boot": "spring/spring-original",
+  "Angular": "angular/angular-original",
+  "Tailwind CSS": "tailwindcss/tailwindcss-original",
+  "Pandas": "pandas/pandas-original",
+  "NumPy": "numpy/numpy-original",
+  "SciPy": "scipy/scipy-original",
+  "Scikit-learn": "scikitlearn/scikitlearn-original",
+  "Jupyter": "jupyter/jupyter-original",
+  "AWS": "amazonwebservices/amazonwebservices-original-wordmark",
+  "Docker": "docker/docker-original",
+  "Git": "git/git-original",
+  "MongoDB": "mongodb/mongodb-original",
+  "PostgreSQL": "postgresql/postgresql-original",
+  "Matplotlib": "matplotlib/matplotlib-original",
+  "Three.js": "threejs/threejs-original",
+};
+
+function iconUrl(name: string): string | null {
+  return ICON_MAP[name] ? `${DEVICON}/${ICON_MAP[name]}.svg` : null;
+}
+
+const MARQUEE_SKILLS = ["Python", "React", "Next.js", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "Docker", "MongoDB", "SciPy", "Three.js", "Tailwind CSS", "Node.js", "Git", "Angular"];
 
 const POSTERS = [
   { title: "Developing a Thermoplastic Device Capable of Partitioning Samples for dPCR", venue: "SBU URECA Symposium, 2026", pdf: "/posters/dpcr-thermoplastic-poster.pdf" },
@@ -265,6 +322,26 @@ function SectionHeading({ label, title }: { label: string; title: string }) {
 
 function Tag({ label }: { label: string }) {
   return <span className="tag">{label}</span>;
+}
+
+function SkillIcon({ name, size = 16 }: { name: string; size?: number }) {
+  const url = iconUrl(name);
+  if (!url) return null;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={url}
+      alt={name}
+      width={size}
+      height={size}
+      loading="lazy"
+      className="shrink-0 object-contain"
+      style={{ width: size, height: size }}
+      onError={(e) => {
+        (e.currentTarget as HTMLImageElement).style.display = "none";
+      }}
+    />
+  );
 }
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
@@ -411,10 +488,10 @@ export default function Home() {
 
       {/* ── SKILLS MARQUEE ──────────────────────────────────────────────── */}
       <div className="marquee-wrap border-y border-slate-200 bg-slate-50 py-4 overflow-hidden">
-        <div className="marquee-track flex gap-8 whitespace-nowrap w-max">
+        <div className="marquee-track flex gap-10 whitespace-nowrap w-max items-center">
           {[...MARQUEE_SKILLS, ...MARQUEE_SKILLS].map((s, i) => (
-            <span key={i} className="text-slate-400 font-mono text-sm flex items-center gap-8">
-              {s} <span className="text-accent/40">◆</span>
+            <span key={i} className="text-slate-500 font-mono text-sm flex items-center gap-2.5 grayscale hover:grayscale-0 transition-all">
+              <SkillIcon name={s} size={18} /> {s}
             </span>
           ))}
         </div>
@@ -573,13 +650,22 @@ export default function Home() {
             <div key={p.name} className="card reveal flex flex-col group">
               <div className="flex justify-between items-start gap-2 mb-1">
                 <h3 className="text-slate-900 font-bold group-hover:text-accent transition-colors">{p.name}</h3>
-                {p.pdf && (
-                  <a href={p.pdf} target="_blank" rel="noopener noreferrer"
-                    className="shrink-0 inline-flex items-center gap-1 text-xs font-semibold text-accent bg-accent-soft/60 border border-accent/20 px-2.5 py-1 rounded-lg hover:bg-accent hover:text-white transition-colors">
-                    Slides
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                  </a>
-                )}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {p.repo && (
+                    <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} code`}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 border border-slate-200 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                      Code
+                    </a>
+                  )}
+                  {p.pdf && (
+                    <a href={p.pdf} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} slides`}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-accent bg-accent-soft/60 border border-accent/20 px-2 py-1 rounded-lg hover:bg-accent hover:text-white transition-colors">
+                      Slides
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                  )}
+                </div>
               </div>
               <p className="text-slate-400 text-xs font-mono mb-2 leading-relaxed">{p.stack}</p>
               <p className="text-accent/70 text-xs mb-3 font-medium">{p.context}</p>
@@ -608,7 +694,9 @@ export default function Home() {
               <p className="text-slate-900 font-bold text-sm mb-3">{category}</p>
               <div className="flex flex-wrap gap-1.5">
                 {skills.map((s) => (
-                  <span key={s} className="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md hover:bg-accent-soft hover:text-accent transition-colors">{s}</span>
+                  <span key={s} className="inline-flex items-center gap-1.5 text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md border border-transparent hover:bg-white hover:border-accent/30 hover:text-accent transition-colors">
+                    <SkillIcon name={s} size={14} />{s}
+                  </span>
                 ))}
               </div>
             </div>
