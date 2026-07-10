@@ -114,6 +114,7 @@ const PROJECTS: {
   tags: ProjectTag[];
   pdf?: string;
   repo?: string;
+  demo?: string;
 }[] = [
     {
       name: "Multi-Modal Evidence Review",
@@ -148,6 +149,7 @@ const PROJECTS: {
       ],
       tags: ["SWE"],
       repo: "https://github.com/aycow/guitar_site",
+      demo: "https://guitar-site-zeta.vercel.app",
     },
     {
       name: "Sprout",
@@ -184,15 +186,7 @@ const PROJECTS: {
       tags: ["SWE", "AI/ML"],
       pdf: "/projects/mon-sillage.pdf",
       repo: "https://github.com/s3raphsembrace/mon-sillage",
-    },
-    {
-      name: "PCA & Clustering Pipeline",
-      stack: "Python · NumPy · Pandas · Matplotlib",
-      context: "Stony Brook University",
-      bullets: [
-        "Implemented PCA for dimensionality reduction and applied DBSCAN and K-Means clustering with heat-map visualizations to identify structure and validate data accuracy.",
-      ],
-      tags: ["AI/ML", "Biomedical"],
+      demo: "https://mon-sillage.vercel.app/",
     },
     {
       name: "Narcolepsy Monitoring Headband",
@@ -214,6 +208,7 @@ const PROJECTS: {
       ],
       tags: ["Hardware", "Biomedical"],
       pdf: "/projects/heart-rate-sensor.pdf",
+      demo: "https://you.stonybrook.edu/heartratesensor/the-topic-and-goal/",
     },
   ];
 
@@ -699,6 +694,13 @@ export default function Home() {
               <div className="flex justify-between items-start gap-2 mb-1">
                 <h3 className="text-slate-900 font-bold group-hover:text-accent transition-colors">{p.name}</h3>
                 <div className="flex items-center gap-1.5 shrink-0">
+                  {p.demo && (
+                    <a href={p.demo} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} live demo`}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-1 rounded-lg hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-colors">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      Live Demo
+                    </a>
+                  )}
                   {p.repo && (
                     <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} code`}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 border border-slate-200 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
