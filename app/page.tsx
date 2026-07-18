@@ -152,6 +152,17 @@ const PROJECTS: {
       demo: "https://guitar-site-zeta.vercel.app",
     },
     {
+      name: "Habits — Sleep Quality Tracker",
+      stack: "Next.js · React · TypeScript · Tailwind CSS",
+      context: "Personal Project",
+      bullets: [
+        "Built a full-stack sleep-wellness web app that quantifies sleep debt on a rolling 14-day ledger, estimates a personalized melatonin wind-down window from logged habits, and correlates daily energy ratings against accumulated sleep debt.",
+        "Designed a clean, research-based UX with a built-in wind-down noise generator and an actionable sleep-science library that translates the science into concrete steps.",
+      ],
+      tags: ["SWE", "Biomedical"],
+      demo: "https://habits-zeta-nine.vercel.app/",
+    },
+    {
       name: "Sprout",
       stack: "React · Vite · Node.js · Express · PostgreSQL · OpenAI API",
       context: "Healthcare Innovation Challenge 2026",
