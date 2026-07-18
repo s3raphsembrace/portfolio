@@ -153,14 +153,16 @@ const PROJECTS: {
     },
     {
       name: "Habits — Sleep Quality Tracker",
-      stack: "Next.js · React · TypeScript · Tailwind CSS",
+      stack: "Next.js · TypeScript · Supabase · Stripe · Expo (React Native) · Tailwind CSS",
       context: "Personal Project",
       bullets: [
-        "Built a full-stack sleep-wellness web app that quantifies sleep debt on a rolling 14-day ledger, estimates a personalized melatonin wind-down window from logged habits, and correlates daily energy ratings against accumulated sleep debt.",
-        "Designed a clean, research-based UX with a built-in wind-down noise generator and an actionable sleep-science library that translates the science into concrete steps.",
+        "Built a full-stack sleep-wellness app that quantifies sleep debt on a rolling 14-day ledger, estimates a personalized melatonin wind-down window from logged habits, and correlates daily energy ratings against accumulated sleep debt.",
+        "Implemented a freemium model with Stripe subscription billing (checkout, webhooks, and billing portal) over a Supabase Postgres backend with authentication and SQL migrations.",
+        "Shipped a companion Expo / React Native mobile app with automated over-the-air deployments via an EAS Update GitHub Actions pipeline triggered on each push.",
       ],
       tags: ["SWE", "Biomedical"],
       demo: "https://habits-zeta-nine.vercel.app/",
+      repo: "https://github.com/s3raphsembrace/habits",
     },
     {
       name: "Sprout",
