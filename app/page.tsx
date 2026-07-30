@@ -53,7 +53,30 @@ const RESEARCH = [
   },
 ];
 
-const EXPERIENCE = [
+const EXPERIENCE: {
+  org: string;
+  sub: string;
+  role: string;
+  date: string;
+  location: string;
+  bullets: string[];
+  tags: string[];
+  links?: { label: string; href: string }[];
+}[] = [
+  {
+    org: "Nature's Finest Security, LLC",
+    sub: "Business Development & Marketing",
+    role: "Intern",
+    date: "Jul 2026 – Present",
+    location: "New York, NY",
+    bullets: [
+      "Organize and maintain the company's sales pipeline in HubSpot CRM — auditing six months of submitted proposals and bids alongside leadership and assigning each opportunity to its correct deal stage, giving management accurate visibility into active, pending, awarded, and lost business.",
+      "Produce and publish 4–8 AI-generated marketing advertisements per week using Zeely AI, coordinating budget allocation with management prior to launch.",
+      "Execute B2B social media marketing across TikTok, Instagram, and Facebook on a consistent publishing cadence promoting security services and recruitment.",
+      "Run a customer review campaign targeting 20+ new Google Reviews, monitoring activity and pacing submissions to sustain organic growth.",
+    ],
+    tags: ["HubSpot CRM", "Business Development", "Digital Marketing", "Pipeline Analytics"],
+  },
   {
     org: "Goldman Sachs Emerging Leaders Series",
     sub: "Engineering Division",
@@ -66,6 +89,7 @@ const EXPERIENCE = [
       "Translated quantitative modeling concepts into accessible presentations for non-technical senior leadership to address complex corporate challenges.",
     ],
     tags: ["Java", "Spring Boot", "Angular", "Python", "Gemini API"],
+    links: [{ label: "Mutual Fund Calculator", href: "/projects/mutual-fund-calculator.pdf" }],
   },
   {
     org: "Project Destined",
@@ -78,6 +102,7 @@ const EXPERIENCE = [
       "Synthesized market data into an investment memo pitched to senior executives, communicating risk-return trade-offs and capital structure rationale.",
     ],
     tags: ["Financial Modeling", "Real Estate", "Excel"],
+    links: [{ label: "Levered Returns Pager", href: "/experience/project-destined-pager.pdf" }],
   },
   {
     org: "Rendr — Internal Medicine",
@@ -104,7 +129,7 @@ const EXPERIENCE = [
   },
 ];
 
-type ProjectTag = "All" | "SWE" | "AI/ML" | "Biomedical" | "Finance" | "Hardware";
+type ProjectTag = "All" | "SWE" | "AI/ML" | "Biomedical" | "Finance" | "Hardware" | "Energy" | "Research";
 
 const PROJECTS: {
   name: string;
@@ -113,8 +138,10 @@ const PROJECTS: {
   bullets: string[];
   tags: ProjectTag[];
   pdf?: string;
+  pdfLabel?: string;
   repo?: string;
   demo?: string;
+  extra?: { label: string; href: string };
 }[] = [
     {
       name: "Multi-Modal Evidence Review",
@@ -200,6 +227,54 @@ const PROJECTS: {
       pdf: "/projects/mon-sillage.pdf",
       repo: "https://github.com/s3raphsembrace/mon-sillage",
       demo: "https://mon-sillage.vercel.app/",
+    },
+    {
+      name: "AI for Energy Conservation — Research Portfolio",
+      stack: "Research Writing · Energy Policy · Sustainability Analysis",
+      context: "WRT 102 Portfolio · Stony Brook University",
+      bullets: [
+        "Authored a research-based argumentative paper evaluating whether AI can reduce net environmental harm — analyzing AI's role in cutting global energy consumption, siting and scaling renewable sources such as offshore wind, and improving energy-plant efficiency.",
+        "Assessed real siting constraints for renewable installations, including average wind speeds, geotechnical foundation conditions, coastal biodiversity impact, and project economics, using peer-reviewed engineering and environmental sources.",
+      ],
+      tags: ["Energy", "Research", "AI/ML"],
+      pdf: "/projects/wrt-energy-ai-portfolio.pdf",
+      pdfLabel: "Portfolio",
+    },
+    {
+      name: "Probiotic Neoantigen Delivery for Cancer Immunotherapy",
+      stack: "Synthetic Biology · Recombinant DNA Design · SnapGene",
+      context: "BME 304 / BME 300 · Stony Brook University",
+      bullets: [
+        "Investigated engineering probiotic E. coli Nissle 1917 within the gut microbiome to deliver tumor-specific neoantigens and enhance cancer immunotherapy outcomes, working in a team of six.",
+        "Modeled recombinant plasmid construction incorporating tumor-targeting vectors, a pBAD inducible promoter, and listeriolysin O sequences; authored an accompanying critical analysis grounded in peer-reviewed Nature literature.",
+      ],
+      tags: ["Biomedical", "Research"],
+      pdf: "/projects/neoantigen-presentation.pdf",
+      extra: { label: "Paper", href: "/projects/neoantigen-critical-analysis.pdf" },
+    },
+    {
+      name: "Acidosis & Bone Mechanical Strength Study",
+      stack: "INSTRON UTM · IBM SPSS · Statistical Analysis",
+      context: "BME 212 · Stony Brook University",
+      bullets: [
+        "Designed and executed an ex vivo three-point bending study on 20 matched-pair specimens to quantify how acidic pH affects bone structural integrity, conducting a power analysis to justify sample size.",
+        "Applied paired t-test analysis in IBM SPSS to establish a statistically significant 15% reduction in force-to-failure (p = 0.009); documented methodology and findings in a formal paper and group presentation.",
+      ],
+      tags: ["Biomedical", "Research"],
+      pdf: "/projects/bone-acidosis-paper.pdf",
+      pdfLabel: "Paper",
+      extra: { label: "Slides", href: "/projects/bone-acidosis-presentation.pdf" },
+    },
+    {
+      name: "Mechanical Gear-Driven Treat Dispenser",
+      stack: "Fusion 360 · AutoCAD · GD&T · Parametric Modeling",
+      context: "Emergent Biodesign · Stony Brook University",
+      bullets: [
+        "Led a 5-person team designing an accessible gear-based dispensing mechanism for wheelchair users with limited hand mobility, applying kinematic calculations to specify pitch diameter (4.0 in), diametral pitch (6), and tooth count (24).",
+        "Produced annotated orthographic and assembly drawings, ran interference analysis to catch gear-to-wall collisions, and applied offset face tolerancing to establish a 0.15 mm clearance fit at the axle interface.",
+      ],
+      tags: ["Hardware", "Biomedical"],
+      pdf: "/projects/dog-treat-dispenser.pdf",
     },
     {
       name: "Narcolepsy Monitoring Headband",
@@ -299,9 +374,12 @@ const LEADERSHIP = [
 
 // ─── HOOKS ────────────────────────────────────────────────────────────────────
 
-function useReveal() {
+// Reveals `.reveal` elements as they scroll into view. Re-runs whenever `dep`
+// changes so content swapped in by a filter (which mounts fresh, still-hidden
+// nodes) gets observed too — otherwise those cards stay stuck at opacity 0.
+function useReveal(dep?: unknown) {
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
+    const els = document.querySelectorAll(".reveal:not(.visible)");
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -315,7 +393,7 @@ function useReveal() {
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, []);
+  }, [dep]);
 }
 
 // ─── COMPONENTS ───────────────────────────────────────────────────────────────
@@ -363,7 +441,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
-  useReveal();
+  useReveal(activeFilter);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -387,7 +465,7 @@ export default function Home() {
 
   const filteredProjects =
     activeFilter === "All" ? PROJECTS : PROJECTS.filter((p) => p.tags.includes(activeFilter));
-  const filters: ProjectTag[] = ["All", "SWE", "AI/ML", "Biomedical", "Finance", "Hardware"];
+  const filters: ProjectTag[] = ["All", "SWE", "AI/ML", "Biomedical", "Hardware", "Energy", "Research", "Finance"];
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
@@ -677,8 +755,15 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap items-center gap-1.5">
                     {e.tags.map((t) => <Tag key={t} label={t} />)}
+                    {e.links?.map((l) => (
+                      <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-accent bg-accent-soft/60 border border-accent/20 px-2.5 py-1 rounded-full hover:bg-accent hover:text-white transition-colors">
+                        {l.label}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -722,9 +807,16 @@ export default function Home() {
                     </a>
                   )}
                   {p.pdf && (
-                    <a href={p.pdf} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} slides`}
+                    <a href={p.pdf} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} ${p.pdfLabel ?? "slides"}`}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-accent bg-accent-soft/60 border border-accent/20 px-2 py-1 rounded-lg hover:bg-accent hover:text-white transition-colors">
-                      Slides
+                      {p.pdfLabel ?? "Slides"}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                    </a>
+                  )}
+                  {p.extra && (
+                    <a href={p.extra.href} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} ${p.extra.label}`}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 border border-slate-200 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
+                      {p.extra.label}
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                     </a>
                   )}
