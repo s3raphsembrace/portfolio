@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import ThreeBackground from "./ThreeBackground";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
@@ -10,6 +11,7 @@ const NAV_LINKS = [
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "Coursework", href: "#coursework" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -355,6 +357,139 @@ const POSTERS = [
   { title: "Generation & Validation of a Mechanical Bidirectional Sweep Signal to Bolster Human T-Cell Proliferation for Cancer Immunotherapy", venue: "VIP Program Symposium, 2025", pdf: "/posters/sweep-signal-poster.pdf" },
 ];
 
+// Course descriptions are quoted/condensed from the Stony Brook University
+// Fall 2026 Undergraduate Catalog course listings.
+const COURSES: {
+  group: string;
+  items: { code: string; title: string; desc: string }[];
+}[] = [
+  {
+    group: "Biomedical Engineering",
+    items: [
+      {
+        code: "BME 100",
+        title: "Introduction to Biomedical Engineering",
+        desc: "A rigorous introduction to biomedical engineering covering bioelectricity and biosensors (action potentials to signal processing), bioimaging, genetic engineering, and biostatistics, with hands-on computational modeling of physiological feedback loops.",
+      },
+      {
+        code: "BME 120",
+        title: "Programming Fundamentals in Biomedical Engineering",
+        desc: "Theory and fundamentals of computer programming for biomedical applications — computer architecture, the interaction between hardware, OS, and application software, and the programming control logic and style critical to all languages, taught primarily in MATLAB.",
+      },
+      {
+        code: "BME 203",
+        title: "Emergent Biodesign",
+        desc: "Team-based design experience covering CAD, 3D printing, microcontroller programming, and hands-on prototyping to solve real engineering problems, with exposure to clinical settings to learn how to identify clinical needs.",
+      },
+      {
+        code: "BME 212",
+        title: "Biomedical Engineering Research Fundamentals",
+        desc: "Data collection and analysis in the context of biophysical measurements — statistical measures, hypothesis testing, linear regression, and ANOVA introduced application-first, alongside instrumentation, A/D boards, and LabVIEW data collection.",
+      },
+      {
+        code: "BME 260",
+        title: "Statics and Dynamics in Biological Systems",
+        desc: "Engineering statics and dynamics applied to biological systems using vector methods: free body diagrams, equilibrium, rectilinear and angular kinetics/kinematics, work, energy, and momentum — paired with the anatomy and physiology of the musculoskeletal, nervous, and cardiovascular systems.",
+      },
+      {
+        code: "BME 271",
+        title: "Introduction to Electric Circuits and Bioelectricity",
+        desc: "Fundamental circuit analysis — lumped time-invariant models of resistors, capacitors, and inductors, Ohm's and Kirchhoff's Laws, nodal and mesh analysis, two-port equivalents, and steady-state AC — applied to biomedical instrumentation, cell electrophysiology, and biopotentials.",
+      },
+      {
+        code: "BME 300",
+        title: "Writing in Biomedical Engineering",
+        desc: "The upper-division writing requirement for the biomedical engineering major, satisfied through technical writing produced alongside an upper-division BME course.",
+      },
+      {
+        code: "BME 304",
+        title: "Genetic Engineering",
+        desc: "Molecular bioengineering with a focus on genetic engineering: DNA structure and function, genetic information flow, recombinant DNA methodology, cloning and transgenics, biotechnology and bioprocessing, and gene therapy — including the ethical, regulatory, and risk-benefit dimensions.",
+      },
+      {
+        code: "BME 361",
+        title: "Data Science with Python",
+        desc: "Python programming applied to real-world data analysis: the standard library, functions, loops, classes and objects, strings, lists, and tuples, plus advanced packages for processing biomedical data and images, taught through both lecture and laboratory.",
+      },
+      {
+        code: "BME 499",
+        title: "Research in Biomedical Engineering",
+        desc: "An independent research project conducted under faculty supervision.",
+      },
+    ],
+  },
+  {
+    group: "Applied Mathematics & Statistics",
+    items: [
+      {
+        code: "AMS 210",
+        title: "Applied Linear Algebra",
+        desc: "Theory and use of vectors and matrices: matrix theory and systems of linear equations, Euclidean and abstract vector spaces, eigenvectors and eigenvalues, and linear transformations.",
+      },
+      {
+        code: "AMS 261",
+        title: "Applied Calculus III",
+        desc: "Vector algebra and analytic geometry in two and three dimensions; multivariable differential calculus and tangent planes; multivariable integral calculus; optimization and Lagrange multipliers; vector calculus including Green's and Stokes's theorems.",
+      },
+      {
+        code: "AMS 310",
+        title: "Survey of Probability and Statistics",
+        desc: "Data analysis, probability theory, and statistics: stem-and-leaf and box plots, fitting straight-line relationships, discrete and continuous probability distributions, conditional and binomial distributions, normal and t distributions, confidence intervals, and significance tests.",
+      },
+      {
+        code: "AMS 361",
+        title: "Applied Calculus IV: Differential Equations",
+        desc: "Homogeneous and inhomogeneous linear differential equations; systems of linear differential equations; solutions via power series and Laplace transforms; partial differential equations and Fourier series.",
+      },
+    ],
+  },
+  {
+    group: "Science",
+    items: [
+      {
+        code: "BIO 202",
+        title: "Fundamentals of Biology: Molecular and Cellular Biology",
+        desc: "The fundamentals of cell biology, biochemistry, and genetics — the biochemical and molecular bases of cell structure, energy metabolism, gene regulation, heredity, and development across organisms from bacteria to humans.",
+      },
+      {
+        code: "CHE 321",
+        title: "Organic Chemistry I",
+        desc: "The structure, reactivity, and properties of organic compounds presented through modern views of chemical bonding, applied to topics ranging from synthetic chemistry to complex functional structures such as lipid bilayers.",
+      },
+      {
+        code: "CHE 322",
+        title: "Organic Chemistry IIA",
+        desc: "A continuation of the structure, reactivity, and properties of organic compounds introduced in CHE 321, emphasizing the chemistry of substances important in biology, medicine, and technology.",
+      },
+    ],
+  },
+  {
+    group: "Finance & Writing",
+    items: [
+      {
+        code: "BUS 330",
+        title: "Principles of Finance",
+        desc: "Core concepts and tools in finance: the role of the financial manager, developing and analyzing corporate financial statements, recognizing a corporation's main sources and uses of funds, and the capital budgeting process.",
+      },
+      {
+        code: "ACC 210",
+        title: "Financial Accounting",
+        desc: "Fundamental financial accounting principles concentrating on identifying, recording, and communicating the economic events of a business — the accounting cycle, income statement, retained earnings statement, and balance sheet, with in-depth treatment of assets and liabilities.",
+      },
+      {
+        code: "BUS 230",
+        title: "Personal Finance",
+        desc: "Personal finance management knowledge and analytical technique for financial decision-making, covering budgeting, debt management, investments, insurance, retirement, and estate planning.",
+      },
+      {
+        code: "WRT 102",
+        title: "Intermediate Writing Workshop",
+        desc: "Strategies for extended academic writing — critical analysis, argument and point of view, and multi-source college-level research essays — developing rhetorical awareness, analytical proficiency, and academic research skills.",
+      },
+    ],
+  },
+];
+
 const LEADERSHIP = [
   {
     org: "Alpha Eta Mu Beta (AEMB) Honor Society",
@@ -439,7 +574,18 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState<ProjectTag>("All");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [bgOn, setBgOn] = useState(true);
+  const [openCourse, setOpenCourse] = useState<string | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+
+  // Remember the visitor's background preference across visits.
+  useEffect(() => {
+    const saved = localStorage.getItem("bg3d");
+    if (saved !== null) setBgOn(saved === "1");
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("bg3d", bgOn ? "1" : "0");
+  }, [bgOn]);
 
   useReveal(activeFilter);
 
@@ -468,7 +614,8 @@ export default function Home() {
   const filters: ProjectTag[] = ["All", "SWE", "AI/ML", "Biomedical", "Hardware", "Energy", "Research", "Finance"];
 
   return (
-    <div className="min-h-screen bg-white text-slate-800">
+    <div className="min-h-screen bg-white/85 text-slate-800">
+      <ThreeBackground enabled={bgOn} />
 
       {/* ── NAV ─────────────────────────────────────────────────────────── */}
       <nav
@@ -483,6 +630,19 @@ export default function Home() {
             {NAV_LINKS.map((l) => (
               <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
             ))}
+            <button
+              onClick={() => setBgOn((v) => !v)}
+              aria-pressed={bgOn}
+              title={bgOn ? "Turn off 3D background" : "Turn on 3D background"}
+              className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-lg border transition-colors ${
+                bgOn
+                  ? "border-accent/40 text-accent bg-accent-soft/50"
+                  : "border-slate-200 text-slate-400 hover:text-slate-600"
+              }`}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full ${bgOn ? "bg-accent" : "bg-slate-300"}`} />
+              3D
+            </button>
             <a
               href="/Matthew_Kuan_Resume.pdf"
               className="btn-shine text-xs font-semibold bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-accent transition-colors"
@@ -505,6 +665,13 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(false)}>{l.label}</a>
             ))}
             <a href="/Matthew_Kuan_Resume.pdf" className="text-sm font-semibold text-accent">Resume ↗</a>
+            <button
+              onClick={() => setBgOn((v) => !v)}
+              aria-pressed={bgOn}
+              className="text-left text-sm font-medium text-slate-500 hover:text-accent transition-colors"
+            >
+              {bgOn ? "Disable" : "Enable"} 3D background
+            </button>
           </div>
         )}
       </nav>
@@ -884,6 +1051,78 @@ export default function Home() {
             <span key={a} className="text-xs text-slate-500 border border-slate-200 px-3 py-1.5 rounded-full hover:border-accent/40 hover:text-accent transition-colors">{a}</span>
           ))}
         </div>
+      </section>
+
+      {/* ── COURSEWORK ──────────────────────────────────────────────────── */}
+      <section id="coursework" className="max-w-5xl mx-auto px-6 py-20">
+        <SectionHeading label="What I've Studied" title="Coursework" />
+        <p className="reveal text-slate-500 text-sm mb-8 -mt-6 max-w-2xl">
+          Selected courses from my Biomedical Engineering &amp; Applied Mathematics degree.
+          Click any course to read its catalog description.
+        </p>
+        <div className="flex flex-col gap-8">
+          {COURSES.map((grp) => (
+            <div key={grp.group} className="reveal">
+              <h3 className="text-slate-900 font-bold text-sm mb-3 flex items-center gap-2">
+                <span className="w-4 h-px bg-accent inline-block" />
+                {grp.group}
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-2.5">
+                {grp.items.map((c) => {
+                  const key = c.code;
+                  const open = openCourse === key;
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => setOpenCourse(open ? null : key)}
+                      aria-expanded={open}
+                      className={`text-left rounded-xl border p-4 transition-all duration-300 ${
+                        open
+                          ? "bg-white border-accent/40 shadow-lg shadow-accent/5"
+                          : "bg-white/60 border-slate-200 hover:border-accent/30 hover:bg-white"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <span className="font-mono text-xs text-accent font-semibold">{c.code}</span>
+                          <p className="text-slate-800 text-sm font-medium leading-snug">{c.title}</p>
+                        </div>
+                        <span
+                          className={`shrink-0 mt-0.5 text-slate-400 transition-transform duration-300 ${
+                            open ? "rotate-45 text-accent" : ""
+                          }`}
+                        >
+                          +
+                        </span>
+                      </div>
+                      <div
+                        className={`grid transition-all duration-300 ease-out ${
+                          open ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0"
+                        }`}
+                      >
+                        <div className="overflow-hidden">
+                          <p className="text-slate-600 text-xs leading-relaxed">{c.desc}</p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="reveal text-slate-400 text-xs mt-8">
+          Course descriptions adapted from the{" "}
+          <a
+            href="https://catalog.stonybrook.edu/content.php?catoid=11&navoid=1135"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
+            Stony Brook University Undergraduate Catalog
+          </a>
+          .
+        </p>
       </section>
 
       {/* ── CONTACT ─────────────────────────────────────────────────────── */}
