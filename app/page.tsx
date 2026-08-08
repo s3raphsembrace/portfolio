@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import ThreeBackground from "./ThreeBackground";
+import dynamic from "next/dynamic";
+
+// three.js is ~150 kB and purely decorative — keep it out of the initial bundle
+// and off the server render so it never blocks first paint.
+const ThreeBackground = dynamic(() => import("./ThreeBackground"), {
+  ssr: false,
+  loading: () => null,
+});
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
