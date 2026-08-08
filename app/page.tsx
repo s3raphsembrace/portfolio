@@ -611,7 +611,7 @@ export default function Home() {
   const [bgOn, setBgOn] = useState(true);
   const [dark, setDark] = useState(false);
   const [openCourse, setOpenCourse] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState<string>("home");
+  const [activeSection, setActiveSection] = useState<string>("");
   const [progress, setProgress] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -646,9 +646,11 @@ export default function Home() {
       const max = doc.scrollHeight - doc.clientHeight;
       setProgress(max > 0 ? (doc.scrollTop / max) * 100 : 0);
 
-      // Active section = the last one whose top is above the 40% viewport line.
+      // Active section = the last one whose top has crossed the 40% viewport
+      // line. Empty while still on the hero, so nothing is highlighted before
+      // the reader has actually reached a section.
       const line = window.innerHeight * 0.4;
-      let current = ids[0];
+      let current = "";
       for (const id of ids) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= line) current = id;
@@ -845,10 +847,14 @@ export default function Home() {
             </a>
             <div className="flex items-center gap-1 ml-2">
               <a href="https://linkedin.com/in/matt-kuan" target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-accent hover:border-accent transition-colors text-sm font-medium">in</a>
+                aria-label="Matthew Kuan on LinkedIn (opens in a new tab)"
+                className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-accent hover:border-accent transition-colors text-sm font-medium">
+                <span aria-hidden="true">in</span>
+              </a>
               <a href="https://github.com/s3raphsembrace" target="_blank" rel="noopener noreferrer"
+                aria-label="Matthew Kuan on GitHub (opens in a new tab)"
                 className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-accent hover:border-accent transition-colors">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" /></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" /></svg>
               </a>
             </div>
           </div>
