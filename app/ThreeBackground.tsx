@@ -13,7 +13,13 @@ import * as THREE from "three";
  * Bails out entirely (renders nothing, allocates nothing) when `enabled` is
  * false or the visitor prefers reduced motion.
  */
-export default function ThreeBackground({ enabled }: { enabled: boolean }) {
+export default function ThreeBackground({
+  enabled,
+  dark = false,
+}: {
+  enabled: boolean;
+  dark?: boolean;
+}) {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -80,9 +86,10 @@ export default function ThreeBackground({ enabled }: { enabled: boolean }) {
     const points = new THREE.Points(
       pointGeo,
       new THREE.PointsMaterial({
-        color: 0x2563eb,
+        // Brighter, cooler tone on dark backgrounds so the field stays legible.
+        color: dark ? 0x8ab4ff : 0x2563eb,
         map: glowTex,
-        size: 0.85,
+        size: dark ? 0.95 : 0.85,
         transparent: true,
         opacity: 1,
         sizeAttenuation: true,
@@ -100,9 +107,9 @@ export default function ThreeBackground({ enabled }: { enabled: boolean }) {
     const links = new THREE.LineSegments(
       linkGeo,
       new THREE.LineBasicMaterial({
-        color: 0x2563eb,
+        color: dark ? 0x6f9cf5 : 0x2563eb,
         transparent: true,
-        opacity: 0.5,
+        opacity: dark ? 0.4 : 0.5,
       })
     );
     scene.add(links);
@@ -198,7 +205,7 @@ export default function ThreeBackground({ enabled }: { enabled: boolean }) {
         mount.removeChild(renderer.domElement);
       }
     };
-  }, [enabled]);
+  }, [enabled, dark]);
 
   if (!enabled) return null;
 

@@ -1,21 +1,83 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const SITE = "https://matthewkuan.vercel.app";
+const TITLE = "Matthew Kuan — Biomedical Engineer & Software Developer";
+const DESCRIPTION =
+  "Biomedical Engineering & Applied Mathematics student at Stony Brook University. I build at the intersection of biology, signal processing, and software — from microfluidic devices in a cleanroom to full-stack AI web apps.";
+
 export const metadata: Metadata = {
-  title: "Matthew Kuan",
-  description:
-    "Biomedical Engineering & Applied Math student at Stony Brook University — research, software, and everything in between.",
+  metadataBase: new URL(SITE),
+  title: TITLE,
+  description: DESCRIPTION,
+  keywords: [
+    "Matthew Kuan",
+    "Biomedical Engineering",
+    "Software Engineer",
+    "Stony Brook University",
+    "Full-Stack Developer",
+    "Microfluidics",
+    "Data Science",
+    "Portfolio",
+  ],
+  authors: [{ name: "Matthew Kuan" }],
+  creator: "Matthew Kuan",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Matthew Kuan",
-    description: "Biomedical Engineering & Applied Math · Stony Brook University",
     type: "website",
+    url: SITE,
+    siteName: "Matthew Kuan",
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "en_US",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Matthew Kuan — Biomedical Engineer & Software Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
 };
 
+// Applies the saved theme before first paint so the page never flashes the
+// wrong colors. Kept inline and tiny; runs synchronously in <head>.
+const NO_FLASH = `
+(function(){try{
+  var s = localStorage.getItem('theme');
+  var dark = s ? s === 'dark'
+    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (dark) document.documentElement.classList.add('dark');
+}catch(e){}})();
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="antialiased">{children}</body>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
+      </head>
+      <body className="antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white focus:shadow-lg"
+        >
+          Skip to content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }
