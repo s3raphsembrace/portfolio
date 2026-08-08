@@ -614,7 +614,7 @@ export default function Home() {
   const filters: ProjectTag[] = ["All", "SWE", "AI/ML", "Biomedical", "Hardware", "Energy", "Research", "Finance"];
 
   return (
-    <div className="min-h-screen bg-white/85 text-slate-800">
+    <div className="min-h-screen bg-white/70 text-slate-800">
       <ThreeBackground enabled={bgOn} />
 
       {/* ── NAV ─────────────────────────────────────────────────────────── */}

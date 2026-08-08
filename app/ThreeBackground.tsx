@@ -38,8 +38,26 @@ export default function ThreeBackground({ enabled }: { enabled: boolean }) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild(renderer.domElement);
 
+    // Soft radial sprite so points render as glowing dots rather than squares.
+    const makeGlowTexture = () => {
+      const size = 64;
+      const c = document.createElement("canvas");
+      c.width = c.height = size;
+      const ctx = c.getContext("2d")!;
+      const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+      g.addColorStop(0, "rgba(255,255,255,1)");
+      g.addColorStop(0.35, "rgba(255,255,255,0.85)");
+      g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, size, size);
+      const tex = new THREE.CanvasTexture(c);
+      tex.needsUpdate = true;
+      return tex;
+    };
+    const glowTex = makeGlowTexture();
+
     // ── Point cloud ──────────────────────────────────────────────────────────
-    const COUNT = 130;
+    const COUNT = 170;
     const SPREAD = 46;
     const positions = new Float32Array(COUNT * 3);
     const velocities: THREE.Vector3[] = [];
@@ -63,26 +81,28 @@ export default function ThreeBackground({ enabled }: { enabled: boolean }) {
       pointGeo,
       new THREE.PointsMaterial({
         color: 0x2563eb,
-        size: 0.32,
+        map: glowTex,
+        size: 0.85,
         transparent: true,
-        opacity: 0.85,
+        opacity: 1,
         sizeAttenuation: true,
+        depthWrite: false,
       })
     );
     scene.add(points);
 
     // ── Proximity edges ──────────────────────────────────────────────────────
-    const LINK_DIST = 8.5;
-    const MAX_LINKS = COUNT * 8;
+    const LINK_DIST = 9.5;
+    const MAX_LINKS = COUNT * 10;
     const linkPositions = new Float32Array(MAX_LINKS * 6);
     const linkGeo = new THREE.BufferGeometry();
     linkGeo.setAttribute("position", new THREE.BufferAttribute(linkPositions, 3));
     const links = new THREE.LineSegments(
       linkGeo,
       new THREE.LineBasicMaterial({
-        color: 0x3b82f6,
+        color: 0x2563eb,
         transparent: true,
-        opacity: 0.22,
+        opacity: 0.5,
       })
     );
     scene.add(links);
@@ -169,6 +189,7 @@ export default function ThreeBackground({ enabled }: { enabled: boolean }) {
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibility);
       renderer.dispose();
+      glowTex.dispose();
       pointGeo.dispose();
       linkGeo.dispose();
       (points.material as THREE.Material).dispose();
@@ -185,7 +206,7 @@ export default function ThreeBackground({ enabled }: { enabled: boolean }) {
     <div
       ref={mountRef}
       aria-hidden="true"
-      className="fixed inset-0 -z-10 pointer-events-none opacity-55 dark:opacity-40"
+      className="fixed inset-0 -z-10 pointer-events-none"
     />
   );
 }
