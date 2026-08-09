@@ -22,28 +22,28 @@ type PartId = "inlet" | "channels" | "chambers" | "membrane" | "outlet";
 const PARTS: Record<PartId, { title: string; body: string; spec: string }> = {
   inlet: {
     title: "Inlet Port",
-    body: "Sample is pipetted in here. Capillary geometry pulls it through the network without a pump, so the device needs no external instrumentation to load.",
+    body: "Sample is pipetted into this port on one edge of the disc. Capillary geometry pulls it through the network without a pump, so the device needs no external instrumentation to load.",
     spec: "Drilled port · instrument-free loading",
   },
   channels: {
-    title: "Distribution Channel Network",
-    body: "Branching microchannels carry the sample across the full chamber array. Channel depth and taper set how evenly the array fills — the parameter I spent the most time tuning during imprinting.",
-    spec: "SU-8 photolithography → PDMS die → hot-embossed into polycarbonate",
+    title: "Distribution Manifold",
+    body: "A branching manifold along the inlet side splits the sample into parallel rows that sweep across the array toward the outlet. Channel depth and branch taper set how evenly the rows fill — the parameter I spent the most time tuning during imprinting.",
+    spec: "0.7 mm row pitch · SU-8 photolithography → PDMS die → hot-embossed polycarbonate",
   },
   chambers: {
     title: "Partition Chambers",
-    body: "The sample splits into thousands of nanoliter wells. Each becomes an independent PCR microreactor: wells containing target DNA fluoresce, empty ones stay dark, and Poisson statistics on that ratio give absolute concentration without a standard curve.",
-    spec: "~20,000 nanoliter-scale wells · filled in under 30 s",
+    body: "The sample splits into a dense rectangular array of nanoliter wells inscribed in the disc. Each becomes an independent PCR microreactor: wells containing target DNA fluoresce, empty ones stay dark, and Poisson statistics on that ratio give absolute concentration without a standard curve.",
+    spec: "19,968 nanoliter wells · filled in under 30 s",
   },
   membrane: {
     title: "Porous Venting Membrane",
-    body: "The core problem with thermoplastics: unlike PDMS, polycarbonate doesn't breathe, so trapped air blocks chambers from filling. This bonded porous membrane gives that air an escape path — it's what makes a low-cost thermoplastic device viable.",
+    body: "The core problem with thermoplastics: unlike PDMS, polycarbonate doesn't breathe, so trapped air blocks chambers from filling. A porous membrane bonded across the disc gives that air an escape path — it's what makes a low-cost thermoplastic device viable.",
     spec: "Thermal & UV-curable adhesive bonding (NOA72, NEA121RED)",
   },
   outlet: {
     title: "Outlet Port",
-    body: "Excess sample exits here. An oil phase then follows to seal each chamber, isolating the partitions before thermal cycling begins.",
-    spec: "Phase-sealed partitions",
+    body: "Positioned directly opposite the inlet so flow sweeps the full width of the array. Excess sample exits here; an oil phase then follows to seal each chamber, isolating the partitions before thermal cycling.",
+    spec: "Opposing-edge outlet · phase-sealed partitions",
   },
 };
 
@@ -71,7 +71,7 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, W() / H(), 0.1, 200);
-    camera.position.set(0, 15, 22);
+    camera.position.set(0, 12, 19);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(W(), H());
@@ -83,8 +83,8 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
-    controls.minDistance = 12;
-    controls.maxDistance = 40;
+    controls.minDistance = 11;
+    controls.maxDistance = 34;
     controls.maxPolarAngle = Math.PI / 2.05;
     controls.enablePan = false;
     controls.autoRotate = true;
@@ -112,54 +112,70 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
       group.add(mesh);
     };
 
-    // ── Polycarbonate substrate ──────────────────────────────────────────────
+    // ── Polycarbonate disc ───────────────────────────────────────────────────
+    // The real part is a 25.4 mm circular chip; 1 unit here ≈ 1.4 mm.
+    const R = 9;          // disc radius
+    const THICK = 0.9;    // substrate thickness
     const slabMat = new THREE.MeshPhysicalMaterial({
-      color: dark ? 0x8fa3bf : 0xdbe6f5,
+      color: dark ? 0x8f8f8f : 0xdbe6f5,
       transparent: true,
-      opacity: 0.22,
-      roughness: 0.12,
+      opacity: 0.2,
+      roughness: 0.1,
       metalness: 0,
       clearcoat: 1,
       side: THREE.DoubleSide,
     });
-    const slab = new THREE.Mesh(new THREE.BoxGeometry(20, 1.1, 12), slabMat);
-    slab.position.y = -0.2;
-    group.add(slab);
-
-    // Wireframe edges make the transparent slab legible from any angle.
-    const edges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(new THREE.BoxGeometry(20, 1.1, 12)),
-      new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.45 })
+    const disc = new THREE.Mesh(
+      new THREE.CylinderGeometry(R, R, THICK, 96),
+      slabMat
     );
-    edges.position.copy(slab.position);
-    group.add(edges);
+    disc.position.y = -0.15;
+    group.add(disc);
 
-    // ── Porous venting membrane (thin cap layer) ─────────────────────────────
+    // Rim outlines keep the transparent disc readable from any angle.
+    const rimMat = new THREE.LineBasicMaterial({
+      color: ACCENT,
+      transparent: true,
+      opacity: 0.55,
+    });
+    for (const y of [-0.15 + THICK / 2, -0.15 - THICK / 2]) {
+      const pts: THREE.Vector3[] = [];
+      for (let a = 0; a <= 96; a++) {
+        const t = (a / 96) * Math.PI * 2;
+        pts.push(new THREE.Vector3(Math.cos(t) * R, y, Math.sin(t) * R));
+      }
+      group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), rimMat));
+    }
+
+    // ── Porous venting membrane (disc-shaped cap layer) ──────────────────────
     const membrane = new THREE.Mesh(
-      new THREE.BoxGeometry(20, 0.22, 12),
+      new THREE.CylinderGeometry(R, R, 0.16, 96),
       new THREE.MeshPhysicalMaterial({
         color: dark ? 0xfcd9b6 : 0xfef3e2,
         transparent: true,
-        opacity: 0.4,
-        roughness: 0.85,
+        opacity: 0.34,
+        roughness: 0.9,
         side: THREE.DoubleSide,
       })
     );
-    membrane.position.y = 0.62;
+    membrane.position.y = 0.55;
     register(membrane, "membrane");
 
     // ── Chamber array ────────────────────────────────────────────────────────
-    // A representative 24x12 grid stands in for the ~20,000 real wells.
-    const COLS = 24;
-    const ROWS = 12;
-    const chamberGeo = new THREE.BoxGeometry(0.42, 0.42, 0.42);
+    // A representative grid stands in for the 19,968 real wells. The array is a
+    // rectangle inscribed in the disc, exactly as on the fabricated part.
+    const COLS = 30;
+    const ROWS = 18;
+    const HALF_W = 5.9;   // array half-width  (x)
+    const HALF_D = 4.5;   // array half-depth  (z)
+    const chamberGeo = new THREE.BoxGeometry(0.24, 0.3, 0.16);
     const chamberMat = new THREE.MeshStandardMaterial({
       color: ACCENT,
       emissive: ACCENT,
       emissiveIntensity: 0.15,
       roughness: 0.4,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.8,
     });
     const chambers = new THREE.InstancedMesh(chamberGeo, chamberMat, COLS * ROWS);
     chambers.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -168,9 +184,9 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
     let i = 0;
     for (let c = 0; c < COLS; c++) {
       for (let r = 0; r < ROWS; r++) {
-        const x = -8.2 + (c / (COLS - 1)) * 16.4;
-        const z = -4.4 + (r / (ROWS - 1)) * 8.8;
-        dummy.position.set(x, 0.18, z);
+        const x = -HALF_W + (c / (COLS - 1)) * HALF_W * 2;
+        const z = -HALF_D + (r / (ROWS - 1)) * HALF_D * 2;
+        dummy.position.set(x, 0.3, z);
         dummy.updateMatrix();
         chambers.setMatrixAt(i, dummy.matrix);
         chambers.setColorAt(i, new THREE.Color(ACCENT));
@@ -183,47 +199,60 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
     pickable.push(chambers as unknown as THREE.Mesh);
     group.add(chambers);
 
-    // ── Distribution channels ────────────────────────────────────────────────
+    // ── Distribution manifold ────────────────────────────────────────────────
     const channelMat = new THREE.MeshStandardMaterial({
       color: ACCENT,
       emissive: ACCENT,
       emissiveIntensity: 0.3,
       roughness: 0.3,
     });
-    // Spine down the middle plus ribs feeding each chamber row.
-    const spine = new THREE.Mesh(new THREE.BoxGeometry(17.4, 0.16, 0.3), channelMat);
-    spine.position.set(0, 0.42, -5.3);
-    register(spine, "channels");
-    for (let r = 0; r < 6; r++) {
-      const z = -5.3 + ((r + 1) / 6) * 10.4;
-      const rib = new THREE.Mesh(new THREE.BoxGeometry(17.4, 0.14, 0.18), channelMat);
-      rib.position.set(0, 0.42, z);
+    // Vertical risers just inside each port, plus one rib per chamber row
+    // running inlet → outlet, mirroring the branching manifold on the chip.
+    for (const x of [-HALF_W - 0.5, HALF_W + 0.5]) {
+      const riser = new THREE.Mesh(
+        new THREE.BoxGeometry(0.22, 0.14, HALF_D * 2 + 0.6),
+        channelMat
+      );
+      riser.position.set(x, 0.3, 0);
+      register(riser, "channels");
+    }
+    for (let r = 0; r < ROWS; r += 3) {
+      const z = -HALF_D + (r / (ROWS - 1)) * HALF_D * 2;
+      const rib = new THREE.Mesh(
+        new THREE.BoxGeometry(HALF_W * 2 + 1.2, 0.12, 0.1),
+        channelMat
+      );
+      rib.position.set(0, 0.3, z);
       register(rib, "channels");
     }
-    const riser = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.14, 10.6), channelMat);
-    riser.position.set(-8.6, 0.42, 0);
-    register(riser, "channels");
 
-    // ── Ports ────────────────────────────────────────────────────────────────
+    // ── Ports (opposing edges, on the disc centreline) ───────────────────────
     const portMat = new THREE.MeshStandardMaterial({
       color: dark ? 0xfdba74 : 0x1d4ed8,
       roughness: 0.35,
       metalness: 0.3,
     });
     const mkPort = (x: number, id: PartId) => {
-      const p = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 1.5, 28), portMat);
-      p.position.set(x, 0.6, -5.3);
+      const p = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 1.4, 28), portMat);
+      p.position.set(x, 0.5, 0);
       register(p, id);
       const ring = new THREE.Mesh(
-        new THREE.TorusGeometry(0.78, 0.07, 10, 30),
+        new THREE.TorusGeometry(0.64, 0.06, 10, 30),
         new THREE.MeshBasicMaterial({ color: ACCENT })
       );
       ring.rotation.x = Math.PI / 2;
-      ring.position.set(x, 1.35, -5.3);
+      ring.position.set(x, 1.2, 0);
       group.add(ring);
+      // Short lead-in linking the port to its riser.
+      const lead = new THREE.Mesh(
+        new THREE.BoxGeometry(Math.abs(Math.abs(x) - (HALF_W + 0.5)), 0.12, 0.14),
+        channelMat
+      );
+      lead.position.set((x + Math.sign(x) * (HALF_W + 0.5)) / 2, 0.3, 0);
+      register(lead, "channels");
     };
-    mkPort(-9.1, "inlet");
-    mkPort(9.1, "outlet");
+    mkPort(-R + 1.4, "inlet");
+    mkPort(R - 1.4, "outlet");
 
     // ── Interaction ──────────────────────────────────────────────────────────
     const ray = new THREE.Raycaster();
@@ -282,7 +311,7 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
     const dyeColor = new THREE.Color(DYE);
     const baseColor = new THREE.Color(ACCENT);
     const emissive = new THREE.Color(ACCENT);
-    let front = -10;
+    let front = -7.5;
     let raf = 0;
 
     const tick = () => {
@@ -292,8 +321,8 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
       // Sweep a "dye front" left→right, colouring chambers as it passes, to
       // mirror the green-dye injection tests used to check fill quality.
       if (flowingRef.current && !reduced) {
-        front += 0.13;
-        if (front > 12) front = -10;
+        front += 0.09;
+        if (front > 7.5) front = -7.5;
         for (let k = 0; k < cellX.length; k++) {
           chambers.setColorAt(k, cellX[k] < front ? dyeColor : baseColor);
         }

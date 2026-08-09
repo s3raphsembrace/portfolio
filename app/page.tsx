@@ -1303,7 +1303,7 @@ export default function Home() {
                       aria-controls={`course-panel-${key.replace(/\s+/g, "-")}`}
                       className={`text-left rounded-xl border p-4 transition-all duration-300 ${
                         open
-                          ? "bg-white border-accent/40 shadow-lg shadow-accent/5"
+                          ? "bg-white dark:bg-neutral-800 border-accent/40 shadow-lg shadow-accent/5"
                           : "bg-white/60 dark:bg-neutral-800/40 border-slate-200 dark:border-neutral-700 hover:border-accent/30 hover:bg-white dark:hover:bg-neutral-800"
                       }`}
                     >
