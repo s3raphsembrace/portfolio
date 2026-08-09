@@ -86,8 +86,8 @@ export default function ThreeBackground({
     const points = new THREE.Points(
       pointGeo,
       new THREE.PointsMaterial({
-        // Brighter, cooler tone on dark backgrounds so the field stays legible.
-        color: dark ? 0x8ab4ff : 0x2563eb,
+        // Warm orange on the dark-gray surface, blue on white.
+        color: dark ? 0xfb923c : 0x2563eb,
         map: glowTex,
         size: dark ? 0.95 : 0.85,
         transparent: true,
@@ -107,7 +107,7 @@ export default function ThreeBackground({
     const links = new THREE.LineSegments(
       linkGeo,
       new THREE.LineBasicMaterial({
-        color: dark ? 0x6f9cf5 : 0x2563eb,
+        color: dark ? 0xf59e0b : 0x2563eb,
         transparent: true,
         opacity: dark ? 0.4 : 0.5,
       })

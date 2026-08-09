@@ -13,14 +13,11 @@ const ThreeBackground = dynamic(() => import("./ThreeBackground"), {
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
 // ─── EDIT ME ──────────────────────────────────────────────────────────────────
-// Single source of truth for the availability banner. Update these four fields
-// and the hero status line updates everywhere.
+// Drives the availability line in the hero. Flip `available` to false and the
+// pill switches to a neutral "not seeking" state automatically.
 const CURRENTLY = {
   available: true,
-  building: "a sleep-health app with Stripe billing and a React Native companion",
-  researching: "thermoplastic microfluidic devices for dPCR at Stony Brook",
   seeking: "Summer 2027 internships",
-  roles: "SWE · Bioinformatics · Quantitative Finance · Pharma R&D",
 };
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -608,21 +605,27 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState<ProjectTag>("All");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [bgOn, setBgOn] = useState(true);
+  // Both default off/light for first-time visitors; a saved preference wins.
+  const [bgOn, setBgOn] = useState(false);
   const [dark, setDark] = useState(false);
   const [openCourse, setOpenCourse] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<string>("");
   const [progress, setProgress] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
-  // Remember the visitor's background preference across visits.
+  // Restore a previously chosen background preference (default stays off).
   useEffect(() => {
-    const saved = localStorage.getItem("bg3d");
-    if (saved !== null) setBgOn(saved === "1");
+    if (localStorage.getItem("bg3d") === "1") setBgOn(true);
   }, []);
-  useEffect(() => {
-    localStorage.setItem("bg3d", bgOn ? "1" : "0");
-  }, [bgOn]);
+  // Persist only on an actual user action, so the default never overwrites a
+  // saved choice during the first render pass.
+  const toggleBg = () => {
+    setBgOn((prev) => {
+      const next = !prev;
+      localStorage.setItem("bg3d", next ? "1" : "0");
+      return next;
+    });
+  };
 
   // Theme. The inline script in layout.tsx already set the class before paint;
   // here we just sync React state to it, then own it from the toggle onward.
@@ -693,7 +696,7 @@ export default function Home() {
   const filters: ProjectTag[] = ["All", "SWE", "AI/ML", "Biomedical", "Hardware", "Energy", "Research", "Finance"];
 
   return (
-    <div className="min-h-screen bg-white/70 dark:bg-[#0b1120]/75 text-slate-800 dark:text-slate-100 dark:text-slate-200">
+    <div className="min-h-screen bg-white/70 dark:bg-[#171717]/80 text-slate-800 dark:text-neutral-100 dark:text-neutral-200">
       <ThreeBackground enabled={bgOn} dark={dark} />
 
       {/* Scroll progress */}
@@ -707,11 +710,11 @@ export default function Home() {
       {/* ── NAV ─────────────────────────────────────────────────────────── */}
       <nav
         aria-label="Main"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/80 dark:bg-[#0b1120]/85 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 dark:border-slate-800 shadow-sm" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/80 dark:bg-[#171717]/90 backdrop-blur-lg border-b border-slate-200 dark:border-neutral-700 dark:border-neutral-800 shadow-sm" : "bg-transparent"
           }`}
       >
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#home" className="text-slate-900 dark:text-slate-50 dark:text-white font-bold text-base tracking-tight font-mono">
+          <a href="#home" className="text-slate-900 dark:text-neutral-50 dark:text-white font-bold text-base tracking-tight font-mono">
             MK<span className="text-accent">.</span>
           </a>
           <div className="hidden md:flex items-center gap-7">
@@ -729,7 +732,7 @@ export default function Home() {
               onClick={toggleTheme}
               aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
               title={dark ? "Light mode" : "Dark mode"}
-              className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 dark:text-slate-300 hover:text-accent hover:border-accent transition-colors"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-neutral-700 text-slate-500 dark:text-neutral-400 dark:text-neutral-300 hover:text-accent hover:border-accent transition-colors"
             >
               {dark ? (
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
@@ -743,26 +746,26 @@ export default function Home() {
               )}
             </button>
             <button
-              onClick={() => setBgOn((v) => !v)}
+              onClick={toggleBg}
               aria-pressed={bgOn}
               title={bgOn ? "Turn off 3D background" : "Turn on 3D background"}
               className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-lg border transition-colors ${bgOn
                   ? "border-accent/40 text-accent bg-accent-soft/50"
-                  : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  : "border-slate-200 dark:border-neutral-700 text-slate-500 dark:text-neutral-400 hover:text-slate-600 dark:hover:text-neutral-200"
                 }`}
             >
-              <span className={`w-1.5 h-1.5 rounded-full ${bgOn ? "bg-accent" : "bg-slate-300 dark:bg-slate-600"}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${bgOn ? "bg-accent" : "bg-slate-300 dark:bg-neutral-600"}`} />
               3D
             </button>
             <a
               href="/Matthew_Kuan_Resume.pdf"
-              className="btn-shine text-xs font-semibold bg-slate-900 dark:bg-accent text-white dark:text-slate-900 px-4 py-2 rounded-lg hover:bg-accent dark:hover:bg-accent-light transition-colors"
+              className="btn-shine text-xs font-semibold bg-slate-900 dark:bg-accent text-white dark:text-neutral-900 px-4 py-2 rounded-lg hover:bg-accent dark:hover:bg-accent-light transition-colors"
             >
               Resume ↗
             </a>
           </div>
           <button
-            className="md:hidden text-slate-700 dark:text-slate-300 dark:text-slate-200 text-xl"
+            className="md:hidden text-slate-700 dark:text-neutral-300 dark:text-neutral-200 text-xl"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
@@ -771,7 +774,7 @@ export default function Home() {
           </button>
         </div>
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-[#0b1120] border-t border-slate-200 dark:border-slate-800 px-6 py-4 flex flex-col gap-4 shadow-lg">
+          <div className="md:hidden bg-white dark:bg-[#171717] border-t border-slate-200 dark:border-neutral-800 px-6 py-4 flex flex-col gap-4 shadow-lg">
             {NAV_LINKS.map((l) => (
               <a key={l.href} href={l.href} className="nav-link text-base"
                 aria-current={activeSection === l.href.slice(1) ? "true" : undefined}
@@ -780,14 +783,14 @@ export default function Home() {
             <a href="/Matthew_Kuan_Resume.pdf" className="text-sm font-semibold text-accent">Resume ↗</a>
             <button
               onClick={toggleTheme}
-              className="text-left text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-accent transition-colors"
+              className="text-left text-sm font-medium text-slate-500 dark:text-neutral-400 hover:text-accent transition-colors"
             >
               Switch to {dark ? "light" : "dark"} mode
             </button>
             <button
-              onClick={() => setBgOn((v) => !v)}
+              onClick={toggleBg}
               aria-pressed={bgOn}
-              className="text-left text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-accent transition-colors"
+              className="text-left text-sm font-medium text-slate-500 dark:text-neutral-400 hover:text-accent transition-colors"
             >
               {bgOn ? "Disable" : "Enable"} 3D background
             </button>
@@ -803,83 +806,68 @@ export default function Home() {
         ref={heroRef}
         className="relative min-h-screen flex flex-col justify-center overflow-hidden"
         style={{
+          // Pointer-follow spotlight, tinted from the active accent.
           background:
-            "radial-gradient(600px circle at var(--mx, 50%) var(--my, 30%), rgba(37,99,235,0.06), transparent 70%)",
+            "radial-gradient(600px circle at var(--mx, 50%) var(--my, 30%), color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%)",
         }}
       >
         <div className="absolute inset-0 grid-bg" />
-        <div className="blob blob-1 bg-blue-300/40 w-[380px] h-[380px] top-[-60px] right-[10%]" />
-        <div className="blob blob-2 bg-indigo-300/30 w-[320px] h-[320px] bottom-[10%] left-[5%]" />
+        <div className="blob blob-1 bg-blue-300/40 dark:bg-orange-500/30 w-[380px] h-[380px] top-[-60px] right-[10%]" />
+        <div className="blob blob-2 bg-indigo-300/30 dark:bg-amber-500/20 w-[320px] h-[320px] bottom-[10%] left-[5%]" />
 
+        {/* Entrance order is intentional: the name lands first, then the
+            supporting details cascade in around it. */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 w-full pt-24 pb-16">
-          <p className="font-mono text-accent text-sm mb-5 animate-fade-up" style={{ animationDelay: "0.05s" }}>
+          <p className="font-mono text-accent text-sm mb-5 animate-fade-up" style={{ animationDelay: "0.75s" }}>
             <span
-              className={`inline-block w-2 h-2 rounded-full mr-2 ${CURRENTLY.available ? "bg-green-500 animate-pulse" : "bg-slate-400"}`}
+              className={`inline-block w-2 h-2 rounded-full mr-2 ${CURRENTLY.available ? "bg-green-500 animate-pulse" : "bg-slate-400 dark:bg-neutral-500"}`}
               aria-hidden="true"
             />
             {CURRENTLY.available
               ? `Open to ${CURRENTLY.seeking}`
               : "Not currently seeking roles"}
           </p>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-slate-50 mb-4 leading-[1.05] tracking-tight animate-fade-up"
-            style={{ animationDelay: "0.15s" }}>
+          <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-neutral-50 mb-4 leading-[1.05] tracking-tight animate-fade-up"
+            style={{ animationDelay: "0s" }}>
             Matthew Kuan
           </h1>
           {/* A tagline, not a section — keep it out of the heading outline. */}
           <p className="text-2xl md:text-3xl gradient-text font-bold mb-6 animate-fade-up"
-            style={{ animationDelay: "0.25s" }}>
+            style={{ animationDelay: "0.9s" }}>
             Biomedical Engineer &amp; Software Developer
           </p>
-          <p className="text-slate-600 dark:text-slate-300 text-base md:text-lg max-w-2xl leading-relaxed mb-8 animate-fade-up"
-            style={{ animationDelay: "0.35s" }}>
-            Rising junior at <span className="text-slate-900 dark:text-slate-50 font-medium">Stony Brook University</span> studying{" "}
-            <span className="text-slate-900 dark:text-slate-50 font-medium">Biomedical Engineering & Applied Mathematics</span> (GPA 3.72),
+          <p className="text-slate-600 dark:text-neutral-300 text-base md:text-lg max-w-2xl leading-relaxed mb-8 animate-fade-up"
+            style={{ animationDelay: "1.05s" }}>
+            Rising junior at <span className="text-slate-900 dark:text-neutral-50 font-medium">Stony Brook University</span> studying{" "}
+            <span className="text-slate-900 dark:text-neutral-50 font-medium">Biomedical Engineering & Applied Mathematics</span> (GPA 3.72),
             minoring in Finance. I build at the intersection of biology, signal processing, and software.
           </p>
-          <div className="flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "0.45s" }}>
+          <div className="flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "1.2s" }}>
             <a href="#projects"
-              className="btn-shine bg-slate-900 dark:bg-slate-800 text-white font-medium px-6 py-3 rounded-xl hover:bg-accent transition-colors text-sm">
+              className="btn-shine bg-slate-900 dark:bg-neutral-800 text-white font-medium px-6 py-3 rounded-xl hover:bg-accent transition-colors text-sm">
               View Projects
             </a>
             <a href="#contact"
-              className="border border-slate-300 text-slate-700 dark:text-slate-300 font-medium px-6 py-3 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm">
+              className="border border-slate-300 text-slate-700 dark:text-neutral-300 font-medium px-6 py-3 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm">
               Get In Touch
             </a>
             <div className="flex items-center gap-1 ml-2">
               <a href="https://linkedin.com/in/matt-kuan" target="_blank" rel="noopener noreferrer"
                 aria-label="Matthew Kuan on LinkedIn (opens in a new tab)"
-                className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-accent hover:border-accent transition-colors text-sm font-medium">
+                className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-neutral-700 text-slate-500 dark:text-neutral-400 hover:text-accent hover:border-accent transition-colors text-sm font-medium">
                 <span aria-hidden="true">in</span>
               </a>
               <a href="https://github.com/s3raphsembrace" target="_blank" rel="noopener noreferrer"
                 aria-label="Matthew Kuan on GitHub (opens in a new tab)"
-                className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-accent hover:border-accent transition-colors">
+                className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-neutral-700 text-slate-500 dark:text-neutral-400 hover:text-accent hover:border-accent transition-colors">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" /></svg>
               </a>
             </div>
           </div>
 
-          {/* Currently — the at-a-glance status a recruiter needs first. */}
-          <dl
-            className="mt-10 animate-fade-up grid sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-200 dark:bg-slate-700 max-w-3xl"
-            style={{ animationDelay: "0.55s" }}
-          >
-            {[
-              { k: "Building", v: CURRENTLY.building },
-              { k: "Researching", v: CURRENTLY.researching },
-              { k: "Seeking", v: `${CURRENTLY.seeking} — ${CURRENTLY.roles}` },
-            ].map((row) => (
-              <div key={row.k} className="bg-white/90 dark:bg-[#0b1120]/90 p-4">
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-accent mb-1.5">
-                  {row.k}
-                </dt>
-                <dd className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">{row.v}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-slate-500 dark:text-slate-400 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-slate-500 dark:text-neutral-400 animate-bounce">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M12 5v14M19 12l-7 7-7-7" />
           </svg>
@@ -889,10 +877,10 @@ export default function Home() {
       {/* ── SKILLS MARQUEE ──────────────────────────────────────────────── */}
       {/* Decorative: the list is duplicated for the seamless loop, so hide it
           from assistive tech — the real skill list lives in the Skills section. */}
-      <div aria-hidden="true" className="marquee-wrap border-y border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 py-4 overflow-hidden">
+      <div aria-hidden="true" className="marquee-wrap border-y border-slate-200 dark:border-neutral-700 bg-slate-50 dark:bg-neutral-800/50 py-4 overflow-hidden">
         <div className="marquee-track flex gap-10 whitespace-nowrap w-max items-center">
           {[...MARQUEE_SKILLS, ...MARQUEE_SKILLS].map((s, i) => (
-            <span key={i} className="text-slate-500 dark:text-slate-400 font-mono text-sm flex items-center gap-2.5 grayscale hover:grayscale-0 transition-all">
+            <span key={i} className="text-slate-500 dark:text-neutral-400 font-mono text-sm flex items-center gap-2.5 grayscale hover:grayscale-0 transition-all">
               <SkillIcon name={s} size={18} /> {s}
             </span>
           ))}
@@ -911,25 +899,25 @@ export default function Home() {
               <img
                 src="/me.jpg"
                 alt="Matthew Kuan"
-                className="relative w-full aspect-[3/4] object-cover rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg"
+                className="relative w-full aspect-[3/4] object-cover rounded-3xl border border-slate-200 dark:border-neutral-700 shadow-lg"
               />
             </div>
             <div className="mt-4 flex flex-wrap gap-2 justify-center">
               {["🧗 Bouldering", "🛹 Skating", "🤺 Fencing", "✈️ Seoul '25"].map((f) => (
-                <span key={f} className="text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full">{f}</span>
+                <span key={f} className="text-xs text-slate-600 dark:text-neutral-300 bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 px-2.5 py-1 rounded-full">{f}</span>
               ))}
             </div>
           </div>
 
           {/* Bio */}
           <div className="reveal space-y-4">
-            <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+            <p className="text-slate-700 dark:text-neutral-300 text-base leading-relaxed">
               Hello! I am a sophomore at Stony Brook University double majoring in Biomedical Engineering and Applied Mathematics & Statistics. I'm interested in biotechnology, data-driven research, and solving complex problems. I enjoy learning new skills across disciplines, and I'm always open to opportunities that help me grow technically and professionally.
               Feel free to connect with me and contact me at matthew.kuan@stonybrook.edu.
               I studied abroad at Yonsei University in Seoul, which
               sharpened how I adapt and communicate across very different environments.
             </p>
-            <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+            <p className="text-slate-700 dark:text-neutral-300 text-base leading-relaxed">
               Outside of work, I&apos;m usually moving. I picked up bouldering and
               love heading out for outdoor climbs around the city — the climbing community is easily one of
               the most welcoming I&apos;ve found. I skateboard at
@@ -940,10 +928,10 @@ export default function Home() {
               something new and figuring out how it fits together.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
-              <a href="#projects" className="btn-shine bg-slate-900 dark:bg-slate-800 text-white font-medium px-5 py-2.5 rounded-xl hover:bg-accent transition-colors text-sm">
+              <a href="#projects" className="btn-shine bg-slate-900 dark:bg-neutral-800 text-white font-medium px-5 py-2.5 rounded-xl hover:bg-accent transition-colors text-sm">
                 See My Work
               </a>
-              <a href="#contact" className="border border-slate-300 text-slate-700 dark:text-slate-300 font-medium px-5 py-2.5 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm">
+              <a href="#contact" className="border border-slate-300 text-slate-700 dark:text-neutral-300 font-medium px-5 py-2.5 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm">
                 Reach Out
               </a>
             </div>
@@ -958,34 +946,34 @@ export default function Home() {
           <div className="card reveal">
             <div className="flex justify-between items-start mb-2">
               <div>
-                <p className="text-slate-900 dark:text-slate-50 font-bold">Stony Brook University</p>
-                <p className="text-slate-500 dark:text-slate-400 text-sm">B.E. Biomedical Engineering & Applied Math</p>
+                <p className="text-slate-900 dark:text-neutral-50 font-bold">Stony Brook University</p>
+                <p className="text-slate-500 dark:text-neutral-400 text-sm">B.E. Biomedical Engineering & Applied Math</p>
               </div>
-              <span className="text-slate-500 dark:text-slate-400 text-xs text-right shrink-0 ml-2">Expected May 2028</span>
+              <span className="text-slate-500 dark:text-neutral-400 text-xs text-right shrink-0 ml-2">Expected May 2028</span>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 text-sm mb-3">
+            <p className="text-slate-500 dark:text-neutral-400 text-sm mb-3">
               Minor: Finance · Biomechanics & Materials · <span className="text-accent font-semibold">GPA 3.72</span>
             </p>
             <div className="flex flex-wrap gap-1.5">
               {["Linear Algebra", "Probability & Stats", "Principles of Finance", "Organic Chem I & II", "Genetic Engineering", "Data Science w/ Python"].map(c => (
-                <span key={c} className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">{c}</span>
+                <span key={c} className="text-xs text-slate-500 dark:text-neutral-400 bg-slate-100 dark:bg-neutral-800 px-2 py-0.5 rounded">{c}</span>
               ))}
             </div>
           </div>
           <div className="card reveal">
             <div className="flex justify-between items-start mb-2">
               <div>
-                <p className="text-slate-900 dark:text-slate-50 font-bold">Yonsei University</p>
-                <p className="text-slate-500 dark:text-slate-400 text-sm">International Academic Programs Scholarship</p>
+                <p className="text-slate-900 dark:text-neutral-50 font-bold">Yonsei University</p>
+                <p className="text-slate-500 dark:text-neutral-400 text-sm">International Academic Programs Scholarship</p>
               </div>
-              <span className="text-slate-500 dark:text-slate-400 text-xs text-right shrink-0 ml-2">Seoul, South Korea</span>
+              <span className="text-slate-500 dark:text-neutral-400 text-xs text-right shrink-0 ml-2">Seoul, South Korea</span>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 text-sm mb-3">
+            <p className="text-slate-500 dark:text-neutral-400 text-sm mb-3">
               Study Abroad · <span className="text-accent font-semibold">GPA 4.30 / 4.30</span>
             </p>
             <div className="flex flex-wrap gap-1.5">
               {["East Asian Art History", "Linear Algebra"].map(c => (
-                <span key={c} className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">{c}</span>
+                <span key={c} className="text-xs text-slate-500 dark:text-neutral-400 bg-slate-100 dark:bg-neutral-800 px-2 py-0.5 rounded">{c}</span>
               ))}
             </div>
           </div>
@@ -1000,17 +988,17 @@ export default function Home() {
             <div key={r.org} className="card reveal">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-3">
                 <div>
-                  <p className="text-slate-900 dark:text-slate-50 font-bold">{r.org}</p>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm">{r.sub}</p>
+                  <p className="text-slate-900 dark:text-neutral-50 font-bold">{r.org}</p>
+                  <p className="text-slate-500 dark:text-neutral-400 text-sm">{r.sub}</p>
                 </div>
                 <div className="text-left sm:text-right shrink-0">
                   <p className="text-accent text-sm font-semibold">{r.role}</p>
-                  <p className="text-slate-500 dark:text-slate-400 text-xs">{r.date}</p>
+                  <p className="text-slate-500 dark:text-neutral-400 text-xs">{r.date}</p>
                 </div>
               </div>
               <ul className="space-y-1.5 mb-4">
                 {r.bullets.map((b, i) => (
-                  <li key={i} className="text-slate-600 dark:text-slate-300 text-sm flex gap-2.5">
+                  <li key={i} className="text-slate-600 dark:text-neutral-300 text-sm flex gap-2.5">
                     <span className="shrink-0 mt-1.5 w-1 h-1 rounded-full bg-accent" />
                     <span>{b}</span>
                   </li>
@@ -1024,19 +1012,19 @@ export default function Home() {
         </div>
 
         <div className="mt-10 reveal">
-          <h3 className="text-slate-900 dark:text-slate-50 font-bold mb-4 flex items-center gap-2">
+          <h3 className="text-slate-900 dark:text-neutral-50 font-bold mb-4 flex items-center gap-2">
             <span className="text-accent">📄</span> Poster Presentations
           </h3>
           <div className="flex flex-col gap-3">
             {POSTERS.map((p) => (
               <a key={p.title} href={p.pdf} target="_blank" rel="noopener noreferrer"
-                className="group flex gap-4 items-center p-4 bg-slate-50 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-accent/40 hover:bg-white dark:hover:bg-slate-900 hover:shadow-lg hover:shadow-accent/5 transition-all">
+                className="group flex gap-4 items-center p-4 bg-slate-50 dark:bg-neutral-800/50 rounded-xl border border-slate-200 dark:border-neutral-700 hover:border-accent/40 hover:bg-white dark:hover:bg-neutral-800 hover:shadow-lg hover:shadow-accent/5 transition-all">
                 <div className="w-9 h-9 rounded-lg bg-accent-soft flex items-center justify-center shrink-0 text-accent text-sm font-bold group-hover:bg-accent group-hover:text-white transition-colors">P</div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-slate-800 dark:text-slate-100 text-sm font-medium leading-snug group-hover:text-accent transition-colors">{p.title}</p>
-                  <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">{p.venue}</p>
+                  <p className="text-slate-800 dark:text-neutral-100 text-sm font-medium leading-snug group-hover:text-accent transition-colors">{p.title}</p>
+                  <p className="text-slate-500 dark:text-neutral-400 text-xs mt-1">{p.venue}</p>
                 </div>
-                <span className="shrink-0 text-xs font-medium text-slate-500 dark:text-slate-400 group-hover:text-accent flex items-center gap-1 transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0">
+                <span className="shrink-0 text-xs font-medium text-slate-500 dark:text-neutral-400 group-hover:text-accent flex items-center gap-1 transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0">
                   View PDF
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                 </span>
@@ -1058,17 +1046,17 @@ export default function Home() {
                 <div className="card">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-3">
                     <div>
-                      <p className="text-slate-900 dark:text-slate-50 font-bold">{e.org}</p>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm">{e.sub}</p>
+                      <p className="text-slate-900 dark:text-neutral-50 font-bold">{e.org}</p>
+                      <p className="text-slate-500 dark:text-neutral-400 text-sm">{e.sub}</p>
                     </div>
                     <div className="text-left sm:text-right shrink-0">
                       <p className="text-accent text-sm font-semibold">{e.role}</p>
-                      <p className="text-slate-500 dark:text-slate-400 text-xs">{e.date} · {e.location}</p>
+                      <p className="text-slate-500 dark:text-neutral-400 text-xs">{e.date} · {e.location}</p>
                     </div>
                   </div>
                   <ul className="space-y-1.5 mb-4">
                     {e.bullets.map((b, i) => (
-                      <li key={i} className="text-slate-600 dark:text-slate-300 text-sm flex gap-2.5">
+                      <li key={i} className="text-slate-600 dark:text-neutral-300 text-sm flex gap-2.5">
                         <span className="shrink-0 mt-1.5 w-1 h-1 rounded-full bg-accent" />
                         <span>{b}</span>
                       </li>
@@ -1098,8 +1086,8 @@ export default function Home() {
           {filters.map((f) => (
             <button key={f} onClick={() => setActiveFilter(f)}
               className={`text-sm px-4 py-1.5 rounded-full border font-medium transition-all duration-200 ${activeFilter === f
-                  ? "bg-slate-900 dark:bg-accent text-white dark:text-slate-900 border-slate-900 dark:border-accent"
-                  : "border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-accent hover:text-accent"
+                  ? "bg-slate-900 dark:bg-accent text-white dark:text-neutral-900 border-slate-900 dark:border-accent"
+                  : "border-slate-200 dark:border-neutral-700 text-slate-500 dark:text-neutral-400 hover:border-accent hover:text-accent"
                 }`}>
               {f}
             </button>
@@ -1109,7 +1097,7 @@ export default function Home() {
           {filteredProjects.map((p) => (
             <div key={p.name} className="card reveal flex flex-col group">
               <div className="flex justify-between items-start gap-2 mb-1">
-                <h3 className="text-slate-900 dark:text-slate-50 font-bold group-hover:text-accent transition-colors">{p.name}</h3>
+                <h3 className="text-slate-900 dark:text-neutral-50 font-bold group-hover:text-accent transition-colors">{p.name}</h3>
                 <div className="flex items-center gap-1.5 shrink-0">
                   {p.demo && (
                     <a href={p.demo} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} live demo`}
@@ -1120,7 +1108,7 @@ export default function Home() {
                   )}
                   {p.repo && (
                     <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} code`}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 dark:text-neutral-400 border border-slate-200 dark:border-neutral-700 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" /></svg>
                       Code
                     </a>
@@ -1134,21 +1122,21 @@ export default function Home() {
                   )}
                   {p.extra && (
                     <a href={p.extra.href} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} ${p.extra.label}`}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 dark:text-neutral-400 border border-slate-200 dark:border-neutral-700 px-2 py-1 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-colors">
                       {p.extra.label}
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                     </a>
                   )}
                 </div>
               </div>
-              <p className="text-slate-500 dark:text-slate-400 text-xs font-mono mb-2 leading-relaxed">{p.stack}</p>
+              <p className="text-slate-500 dark:text-neutral-400 text-xs font-mono mb-2 leading-relaxed">{p.stack}</p>
               <p className="text-accent text-xs mb-3 font-medium">{p.context}</p>
-              <p className="text-slate-900 dark:text-slate-100 text-sm font-semibold leading-snug mb-3 pl-3 border-l-2 border-accent">
+              <p className="text-slate-900 dark:text-neutral-100 text-sm font-semibold leading-snug mb-3 pl-3 border-l-2 border-accent">
                 {p.impact}
               </p>
               <ul className="space-y-1.5 flex-1 mb-4">
                 {p.bullets.map((b, i) => (
-                  <li key={i} className="text-slate-600 dark:text-slate-300 text-sm flex gap-2.5">
+                  <li key={i} className="text-slate-600 dark:text-neutral-300 text-sm flex gap-2.5">
                     <span className="shrink-0 mt-1.5 w-1 h-1 rounded-full bg-accent" />
                     <span>{b}</span>
                   </li>
@@ -1168,10 +1156,10 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 gap-5">
           {Object.entries(SKILLS).map(([category, skills]) => (
             <div key={category} className="card reveal">
-              <p className="text-slate-900 dark:text-slate-50 font-bold text-sm mb-3">{category}</p>
+              <p className="text-slate-900 dark:text-neutral-50 font-bold text-sm mb-3">{category}</p>
               <div className="flex flex-wrap gap-2">
                 {skills.map((s) => (
-                  <span key={s} className="inline-flex items-center gap-2 text-sm bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-lg border border-transparent hover:bg-white dark:hover:bg-slate-900 hover:border-accent/30 hover:text-accent transition-colors">
+                  <span key={s} className="inline-flex items-center gap-2 text-sm bg-slate-100 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300 px-3 py-1.5 rounded-lg border border-transparent hover:bg-white dark:hover:bg-neutral-800 hover:border-accent/30 hover:text-accent transition-colors">
                     <SkillIcon name={s} size={20} />{s}
                   </span>
                 ))}
@@ -1192,18 +1180,18 @@ export default function Home() {
                   {l.icon}
                 </div>
                 <div>
-                  <p className="text-slate-900 dark:text-slate-50 font-bold leading-snug">{l.org}</p>
+                  <p className="text-slate-900 dark:text-neutral-50 font-bold leading-snug">{l.org}</p>
                   <p className="text-accent text-sm font-semibold">{l.role}</p>
-                  <p className="text-slate-500 dark:text-slate-400 text-xs">{l.date}</p>
+                  <p className="text-slate-500 dark:text-neutral-400 text-xs">{l.date}</p>
                 </div>
               </div>
-              <p className="text-slate-600 dark:text-slate-300 text-sm">{l.desc}</p>
+              <p className="text-slate-600 dark:text-neutral-300 text-sm">{l.desc}</p>
             </div>
           ))}
         </div>
         <div className="reveal flex flex-wrap gap-2">
           {["Project Destined 2026", "Goldman Sachs ELS 2026", "McKinsey Forward 2026", "SBU Bioinformatics Bootcamp 2024", "VIP BEAR Team 2024–26", "HackerRank Orchestrate #85/1773", "HopperHacks WiCS 2026", "L'Oréal Brandstorm 2026", "BMES", "AEMB Honor Society"].map(a => (
-            <span key={a} className="text-xs text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-full hover:border-accent/40 hover:text-accent transition-colors">{a}</span>
+            <span key={a} className="text-xs text-slate-500 dark:text-neutral-400 border border-slate-200 dark:border-neutral-700 px-3 py-1.5 rounded-full hover:border-accent/40 hover:text-accent transition-colors">{a}</span>
           ))}
         </div>
       </section>
@@ -1211,14 +1199,14 @@ export default function Home() {
       {/* ── COURSEWORK ──────────────────────────────────────────────────── */}
       <section id="coursework" className="max-w-5xl mx-auto px-6 py-20">
         <SectionHeading label="What I've Studied" title="Coursework" />
-        <p className="reveal text-slate-500 dark:text-slate-400 text-sm mb-8 -mt-6 max-w-2xl">
+        <p className="reveal text-slate-500 dark:text-neutral-400 text-sm mb-8 -mt-6 max-w-2xl">
           Selected courses from my Biomedical Engineering &amp; Applied Mathematics degree.
           Click any course to read its catalog description.
         </p>
         <div className="flex flex-col gap-8">
           {COURSES.map((grp) => (
             <div key={grp.group} className="reveal">
-              <h3 className="text-slate-900 dark:text-slate-50 font-bold text-sm mb-3 flex items-center gap-2">
+              <h3 className="text-slate-900 dark:text-neutral-50 font-bold text-sm mb-3 flex items-center gap-2">
                 <span className="w-4 h-px bg-accent inline-block" />
                 {grp.group}
               </h3>
@@ -1235,17 +1223,17 @@ export default function Home() {
                       className={`text-left rounded-xl border p-4 transition-all duration-300 ${
                         open
                           ? "bg-white border-accent/40 shadow-lg shadow-accent/5"
-                          : "bg-white/60 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 hover:border-accent/30 hover:bg-white dark:hover:bg-slate-900"
+                          : "bg-white/60 dark:bg-neutral-800/40 border-slate-200 dark:border-neutral-700 hover:border-accent/30 hover:bg-white dark:hover:bg-neutral-800"
                       }`}
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <span className="font-mono text-xs text-accent font-semibold">{c.code}</span>
-                          <p className="text-slate-800 dark:text-slate-100 text-sm font-medium leading-snug">{c.title}</p>
+                          <p className="text-slate-800 dark:text-neutral-100 text-sm font-medium leading-snug">{c.title}</p>
                         </div>
                         <span
                           aria-hidden="true"
-                          className={`shrink-0 mt-0.5 text-slate-500 dark:text-slate-400 transition-transform duration-300 ${
+                          className={`shrink-0 mt-0.5 text-slate-500 dark:text-neutral-400 transition-transform duration-300 ${
                             open ? "rotate-45 text-accent" : ""
                           }`}
                         >
@@ -1259,7 +1247,7 @@ export default function Home() {
                         }`}
                       >
                         <div className="overflow-hidden">
-                          <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">{c.desc}</p>
+                          <p className="text-slate-600 dark:text-neutral-300 text-xs leading-relaxed">{c.desc}</p>
                         </div>
                       </div>
                     </button>
@@ -1269,7 +1257,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <p className="reveal text-slate-500 dark:text-slate-400 text-xs mt-8">
+        <p className="reveal text-slate-500 dark:text-neutral-400 text-xs mt-8">
           Course descriptions adapted from the{" "}
           <a
             href="https://catalog.stonybrook.edu/content.php?catoid=11&navoid=1135"
@@ -1285,7 +1273,7 @@ export default function Home() {
 
       {/* ── CONTACT ─────────────────────────────────────────────────────── */}
       <section id="contact" className="max-w-5xl mx-auto px-6 py-20">
-        <div className="reveal relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-slate-800 px-8 py-14 md:px-14">
+        <div className="reveal relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-neutral-800 px-8 py-14 md:px-14">
           <div className="blob bg-accent/30 w-[300px] h-[300px] top-[-80px] right-[-40px]" />
           <div className="relative z-10">
             <span className="section-label text-accent-light">
@@ -1307,7 +1295,7 @@ export default function Home() {
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-accent/50 transition-all group">
-                  <span className="text-slate-500 dark:text-slate-400 text-xs w-16 shrink-0 font-mono uppercase tracking-wider">{c.label}</span>
+                  <span className="text-slate-500 dark:text-neutral-400 text-xs w-16 shrink-0 font-mono uppercase tracking-wider">{c.label}</span>
                   <span className="text-slate-100 text-sm group-hover:text-accent-light transition-colors truncate">{c.value}</span>
                 </a>
               ))}
@@ -1319,10 +1307,10 @@ export default function Home() {
       {/* ── FOOTER ──────────────────────────────────────────────────────── */}
       </main>
 
-      <footer className="border-t border-slate-200 dark:border-slate-700 max-w-5xl mx-auto px-6 py-8">
+      <footer className="border-t border-slate-200 dark:border-neutral-700 max-w-5xl mx-auto px-6 py-8">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-slate-500 dark:text-slate-400 text-xs">Designed & built by Matthew Kuan · © 2026</p>
-          <p className="text-slate-500 dark:text-slate-400 text-xs font-mono">Next.js · Tailwind CSS · Vercel</p>
+          <p className="text-slate-500 dark:text-neutral-400 text-xs">Designed & built by Matthew Kuan · © 2026</p>
+          <p className="text-slate-500 dark:text-neutral-400 text-xs font-mono">Next.js · Tailwind CSS · Vercel</p>
         </div>
       </footer>
     </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const SITE = "https://matthewkuan.vercel.app";
+const SITE = "https://matthew-kuan-portfolio.vercel.app";
 const TITLE = "Matthew Kuan — Biomedical Engineer & Software Developer";
 const DESCRIPTION =
   "Biomedical Engineering & Applied Mathematics student at Stony Brook University. I build at the intersection of biology, signal processing, and software — from microfluidic devices in a cleanroom to full-stack AI web apps.";
@@ -53,13 +53,13 @@ export const metadata: Metadata = {
 };
 
 // Applies the saved theme before first paint so the page never flashes the
-// wrong colors. Kept inline and tiny; runs synchronously in <head>.
+// wrong colors. Light is the deliberate default for first-time visitors — we
+// only go dark if the visitor has explicitly chosen it before.
 const NO_FLASH = `
 (function(){try{
-  var s = localStorage.getItem('theme');
-  var dark = s ? s === 'dark'
-    : window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (dark) document.documentElement.classList.add('dark');
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
 }catch(e){}})();
 `;
 
