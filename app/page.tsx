@@ -52,36 +52,48 @@ const RESEARCH = [
   {
     org: "Microfluidics for Quantitative and Genomics Biology Lab",
     sub: "Stony Brook University",
-    role: "Student R&D Assistant",
+    role: "Research and Development Engineer + Project Lead",
     date: "Aug 2025 – Present",
     bullets: [
       "Designed and fabricated thermoplastic dPCR partitioning devices using multilayer SU-8 photolithography, hot embossing, and UV-curable adhesive bonding as a cost-effective alternative to conventional PDMS fabrication.",
-      "Diagnosed fabrication failures—including non-uniform imprints and restricted liquid flow—by implementing a custom leveling apparatus during oven curing and bracing the substrate against lateral spreading.",
-      "Evaluated device performance via brightfield & fluorescent microscopy; characterized adhesive wettability through contact-angle measurements (DI water, NOA72, NEA121RED) on native and plasma-treated polycarbonate, analyzed with ImageJ.",
-      "Onboarded and mentored an incoming lab member on fabrication protocols and systematic troubleshooting, reinforcing research continuity across semester transitions.",
+      "Diagnosed and resolved fabrication failures, such as non-uniform imprints and restricted liquid flow, by implementing a custom leveling apparatus during oven curing and bracing the substrate against lateral spreading.",
+      "Evaluated device performance using brightfield and fluorescent microscopy to assess partitioning efficiency and fabrication quality; performed contact angle measurements using DI water, NOA72, and NEA121RED on native and plasma-treated polycarbonate surfaces, analyzed with ImageJ to characterize adhesive wettability.",
+      "Executed quality control audits using brightfield macroscopic imaging to assess microstructure integrity, functional reliability, and dimensional consistency across fabrication batches.",
+      "Streamlined device synthesis workflows and process development protocols, improving production yield and structural consistency across fabrication cycles.",
+      "Engineered complex testing devices to investigate cellular heterogeneity and support high-throughput, scalable experiments aligned with new development protocols.",
+      "Onboarded and mentored an incoming lab member on fabrication protocols, organizational practices, and systematic troubleshooting approaches, reinforcing research continuity across semester transitions.",
+      "Maintained comprehensive records in alignment with laboratory data standards, contributing to reproducible and auditable research documentation.",
     ],
     tags: ["Microfluidics", "dPCR", "Photolithography", "ImageJ", "Cleanroom"],
   },
   {
     org: "Low-Intensity Vibration (LIV) Lab",
     sub: "Stony Brook University",
-    role: "Student R&D Assistant",
+    role: "Data Analyst",
     date: "Jan 2025 – May 2025",
     bullets: [
-      "Developed a Frequency and Amplitude Modulated Sweep (FAMS) vibration signal (20–50 Hz) for T-cell proliferation studies supporting CAR-T cell biomanufacturing.",
-      "Engineered a LabVIEW-controlled LIV device integrating an Arduino microcontroller, linear voice-coil actuator, and tri-axis accelerometer to generate custom bilateral sweep signals (0–35 Hz).",
-      "Built a Python QC analytics pipeline (Pandas, NumPy, SciPy, Plotly, enDAQ) to verify sweep frequency accuracy, detect noise artifacts, compute acceleration/displacement, and flag deviations above 0.9g.",
-      "Explored Oxford Nanopore's EPI2ME platform and wf-teloseq Nextflow workflow to assess telomere-length sequencing as a biomarker readout for LIV-stimulated T-cell studies.",
+      "Developed a Frequency and Amplitude Modulated Sweep (FAMS) vibration signal to model physiologically relevant mechanical stimuli (20\u201350 Hz) for T-cell proliferation studies supporting CAR-T biomanufacturing.",
+      "Engineered and validated a LabVIEW-controlled LIV device integrating an Arduino microcontroller, linear voice-coil actuator, and tri-axis accelerometer to generate custom bilateral sweep signals (0\u201335 Hz).",
+      "Built a Python-based quality-control analytics pipeline (pandas, NumPy, SciPy, Plotly, enDAQ) to verify laboratory device sweep signal frequency accuracy, detect noise artifacts, compute acceleration, and flag deviations.",
+      "Collaborated with a multidisciplinary team to streamline validation workflows by proposing real-time acceleration feedback integration (PID), eliminating manual data export steps, and supporting experimental timelines.",
+      "Compiled experimental findings into comprehensive research reports and poster presentations; delivered concise project updates during weekly cross-functional lab meetings and reviewed relevant literature and lab documentation.",
+      "Analyzed accelerometer data to identify oscillation artifacts at higher frequencies (36\u201350 Hz), informing hardware and software redesign for improved signal stability.",
+      "Prepared experimental plans for upcoming in vitro T-cell stimulation studies, aligning FAMS signal parameters with prior foundational research on LIV-induced proliferation.",
+      "Managed lab data practices for quantifying cell proliferation, gene expression, and protein assays, adhering to research standards to ensure data integrity and organized documentation.",
+      "Performed primary cell culture in sterile conditions, recording microscopic imaging observations and evaluating experimental results through ELISA and Western Blotting protein assays.",
+      "Explored Oxford Nanopore Technologies\u2019 EPI2ME platform and wf-teloseq Nextflow workflow to assess feasibility of telomere-length sequencing as a biomarker readout for LIV-stimulated T-cell studies.",
     ],
     tags: ["Python", "LabVIEW", "Arduino", "SciPy", "Signal Processing"],
   },
   {
-    org: "Aquatic Research Environmental Assessment Center (AREAC)",
+    org: "Aquatic Research Environmental Assessment Center",
     sub: "Brooklyn College",
     role: "Research Intern",
     date: "Jul 2023 – Sep 2023",
     bullets: [
-      "Analyzed qualitative and quantitative organism data to assess the effects of chemical exposures on aquatic ecosystems.",
+      "Analyzed qualitative and quantitative organism data to assess chemical exposure effects on aquatic ecosystems.",
+      "Administered controlled chemical treatments and coordinated experimental procedures with a research team.",
+      "Completed coursework in scientific principles, laboratory research methods, and data analysis techniques.",
       "Represented the research group in a poster presentation at the NYCSRM Consortium at the American Museum of Natural History.",
     ],
     tags: ["Data Analysis", "Environmental Science"],
@@ -99,68 +111,81 @@ const EXPERIENCE: {
   links?: { label: string; href: string }[];
 }[] = [
   {
-    org: "Nature's Finest Security, LLC",
+    org: "Nature\u2019s Finest Security, LLC",
     sub: "Business Development & Marketing",
     role: "Intern",
-    date: "Jul 2026 – Present",
+    date: "Jul 2026 \u2013 Aug 2026",
     location: "New York, NY",
     bullets: [
-      "Organize and maintain the company's sales pipeline in HubSpot CRM — auditing six months of submitted proposals and bids alongside leadership and assigning each opportunity to its correct deal stage, giving management accurate visibility into active, pending, awarded, and lost business.",
-      "Produce and publish 4–8 AI-generated marketing advertisements per week using Zeely AI, coordinating budget allocation with management prior to launch.",
+      "Organize and maintain the company\u2019s sales pipeline in HubSpot CRM \u2014 auditing six months of submitted proposals and assigning each opportunity to its correct deal stage, enabling accurate visibility into business performance.",
+      "Produce and publish 4\u20138 AI-generated marketing advertisements per week using Zeely AI, coordinating budget allocation with management prior to launch.",
       "Execute B2B social media marketing across TikTok, Instagram, and Facebook on a consistent publishing cadence promoting security services and recruitment.",
       "Run a customer review campaign targeting 20+ new Google Reviews, monitoring activity and pacing submissions to sustain organic growth.",
     ],
     tags: ["HubSpot CRM", "Business Development", "Digital Marketing", "Pipeline Analytics"],
   },
   {
+    org: "Residential Safety Program (RSP)",
+    sub: "Stony Brook University",
+    role: "Safety Operations Assistant",
+    date: "Feb 2026 \u2013 May 2026",
+    location: "Stony Brook, NY",
+    bullets: [
+      "Draft detailed incident reports and proactively identify operational and security concerns to safeguard 10,000+ campus residents, demonstrating strong written communication and meticulous attention to detail.",
+      "Coordinate with emergency dispatch and leadership to resolve incidents efficiently, maintaining reliable operational continuity during high-pressure events and adhering to safety protocols in high-density residential zones.",
+    ],
+    tags: ["Operations", "Communication", "Documentation"],
+  },
+  {
     org: "Goldman Sachs Emerging Leaders Series",
     sub: "Engineering Division",
-    role: "Participant",
-    date: "Jan 2026 – Apr 2026",
+    role: "Engineering Division Participant",
+    date: "Jan 2026 \u2013 Apr 2026",
     location: "Dallas, TX",
     bullets: [
-      "Engineered a full-stack mutual fund investment predictor using Java Spring Boot and Angular, developing RESTful APIs to compute projected returns from historical data, U.S. Treasury rates, and predictive AI models.",
-      "Collaborated with Goldman Sachs engineers to design, test, and present an in-person capstone visualizing expected returns and risk profiles for end-users.",
-      "Translated quantitative modeling concepts into accessible presentations for non-technical senior leadership to address complex corporate challenges.",
+      "Engineered a full-stack mutual fund investment predictor using Java Spring Boot and Angular, developing RESTful APIs to compute projected investment returns from historical data, U.S. Treasury rates, and AI models.",
+      "Collaborated with Goldman Sachs engineers to design, test, and present an in-person capstone showcasing an interactive, user-friendly website that visualizes expected returns and risk profiles for end-users.",
+      "Analyzed complex financial datasets to optimize portfolio decision-making frameworks using robust data structures, synthesizing findings into a cumulative presentation on a scalable solution for management directors.",
+      "Integrated Yahoo Finance API for 5-year historical returns, FRED Treasury API for risk-free rates and term/credit factors, and Newton Analytics API for beta calculations across 48 mutual funds and 20 bond funds.",
+      "Built an interactive fund selection with category filtering, search, and risk-level indicators; implemented principal input validation, year selection, and year-by-year growth visualization with bar charts and data tables.",
+      "Seeded a Postgres database with bond fund regression coefficients computed via a Python script fetching from Yahoo Finance; cached live Newton Analytics beta values and FRED risk-free rates to minimize redundant API calls.",
+      "Added an AI chatbot using the Gemini API with tool-calling to fetch live expected returns and future value projections for user-specified funds, enforcing recommendation guardrails and risk explanations.",
+      "Built JUnit tests validating that future-value computations return the correct number of time-period entries and produce positive, finite results across all fund categories.",
     ],
-    tags: ["Java", "Spring Boot", "Angular", "Python", "Gemini API"],
+    tags: ["Java", "Spring Boot", "Angular", "Python", "PostgreSQL", "Gemini API"],
     links: [{ label: "Mutual Fund Calculator", href: "/projects/mutual-fund-calculator.pdf" }],
   },
   {
     org: "Project Destined",
     sub: "Real Estate Private Equity Program",
-    role: "Intern",
-    date: "Jan 2026 – Mar 2026",
+    role: "Real Estate Private Equity Intern",
+    date: "Jan 2026 \u2013 Mar 2026",
     location: "Remote",
     bullets: [
-      "Developed a 10-year financial forecast model for a $6.5M, 28-unit multifamily acquisition projecting a $12.7M terminal value; structured $7.0M+ in capital sources including debt sizing, amortization, and equity optimization.",
-      "Synthesized market data into an investment memo pitched to senior executives, communicating risk-return trade-offs and capital structure rationale.",
+      "Developed a 10-year financial forecast model for a $6.5M, 28-unit multifamily acquisition projecting a $12.7M terminal value; structured $7.0M+ in capital sources, including debt sizing, amortization, and equity optimization.",
+      "Synthesized market data and quantitative analysis into an investment memo pitched to senior executives, communicating risk-return trade-offs and capital structure rationale in a clear, structured narrative.",
     ],
     tags: ["Financial Modeling", "Real Estate", "Excel"],
-    links: [{ label: "Levered Returns Pager", href: "/experience/project-destined-pager.pdf" }],
+    links: [
+      { label: "Levered Returns Pager", href: "/experience/project-destined-pager.pdf" },
+      {
+        label: "Certificate",
+        href: "https://certificates.projectdestined.com/credentials/1425608d-a330-4131-b53a-867041192574?recipient=true",
+      },
+    ],
   },
   {
-    org: "Rendr — Internal Medicine",
+    org: "Rendr \u2014 Internal Medicine",
     sub: "Private Practice",
     role: "Shadowing & Medical Intern",
-    date: "Jul 2024 – Jan 2026",
+    date: "Jul 2024 \u2013 Jan 2026",
     location: "New York, NY",
     bullets: [
-      "Directed patients and families to appropriate departments, coordinated referrals across specialties, and responded to high-volume walk-in inquiries with professionalism.",
-      "Monitored patient health conditions and reported significant status changes to providers, facilitating care continuity and efficient patient flow.",
+      "Directed patients and families to appropriate departments, responded to a high volume of walk-in inquiries with professionalism, and coordinated referrals across specialties.",
+      "Monitored patient health conditions in the waiting room and reported significant changes in patient status to providers, facilitating care continuity and efficient patient flow.",
+      "Scheduled follow-up appointments and developed a working understanding of clinical workflows, diagnostic procedures, and patient care approaches from the provider\u2019s perspective.",
     ],
     tags: ["Clinical", "Patient Care", "Healthcare"],
-  },
-  {
-    org: "Residential Safety Program (RSP)",
-    sub: "Stony Brook University",
-    role: "Safety Operations Assistant",
-    date: "Feb 2026 – Present",
-    location: "Stony Brook, NY",
-    bullets: [
-      "Draft detailed incident reports to safeguard 10,000+ campus residents; coordinate with emergency dispatch and leadership during high-pressure events.",
-    ],
-    tags: ["Operations", "Communication", "Documentation"],
   },
 ];
 
@@ -180,176 +205,188 @@ const PROJECTS: {
   demo?: string;
   extra?: { label: string; href: string };
 }[] = [
-    {
-      name: "Multi-Modal Evidence Review",
-      impact: "Placed #85 of 1,773 by cutting per-claim cost to ~$0.001 with a two-stage vision pipeline.",
-      stack: "Gemini API SDK · PyYAML · Pillow · tenacity · tqdm",
-      context: "HackerRank Orchestrate 2026 · #85 / 1773",
-      bullets: [
-        "Built a two-stage multimodal pipeline (Gemini vision) to adjudicate insurance-style damage claims across cars, laptops, and packages — classifying image evidence as supporting, contradicting, or insufficient.",
-        "Designed a cheap Stage-1 validity gate (Flash-Lite) screening for blur and wrong-object issues before expensive Stage-2 analysis, cutting cost to ~$0.001/claim while improving flag reliability, with a macro-F1 evaluation harness.",
-      ],
-      tags: ["AI/ML", "SWE"],
-      repo: "https://github.com/s3raphsembrace/orchestrate",
-    },
-    {
-      name: "Mutual Fund Calculator",
-      impact: "Full-stack return predictor over 68 funds, built and demoed to Goldman Sachs directors.",
-      stack: "Java Spring Boot · Angular · Python · PostgreSQL · Gemini API",
-      context: "Goldman Sachs ELS 2026",
-      bullets: [
-        "Full-stack investment predictor computing projected returns using CAPM and Fama-French models, integrating Yahoo Finance, FRED Treasury, and Newton Analytics APIs across 48 mutual funds and 20 bond funds.",
-        "Seeded a PostgreSQL database with bond fund regression coefficients via a Python pipeline; added a Gemini AI chatbot with tool-calling for live projections and guardrailed recommendations, backed by JUnit tests.",
-      ],
-      tags: ["SWE", "AI/ML", "Finance"],
-      pdf: "/projects/mutual-fund-calculator.pdf",
-      repo: "https://github.com/dpjojan/GS-ELS",
-    },
-    {
-      name: "Guitarverse",
-      impact: "Real-time pitch detection and 3D tab rendering in the browser, shipped at a 36-hour hackathon.",
-      stack: "Next.js · Three.js · MongoDB · Docker · Demucs · basic-pitch",
-      context: "HopperHacks WiCS 2026",
-      bullets: [
-        "Built a gamified guitar practice platform with real-time pitch detection, MIDI import, and 3D tab visualization (Three.js + React Three Fiber).",
-        "Integrated Demucs for audio stem separation via a Dockerized Python backend; built NextAuth, campaign modes, and a MongoDB-backed leaderboard.",
-      ],
-      tags: ["SWE"],
-      repo: "https://github.com/aycow/guitar_site",
-      demo: "https://guitar-site-zeta.vercel.app",
-    },
-    {
-      name: "Habits — Sleep Quality Tracker",
-      impact: "A live, revenue-ready product: Stripe billing, Supabase backend, and a React Native app.",
-      stack: "Next.js · TypeScript · Supabase · Stripe · Expo (React Native) · Tailwind CSS",
-      context: "Personal Project",
-      bullets: [
-        "Built a full-stack sleep-wellness app that quantifies sleep debt on a rolling 14-day ledger, estimates a personalized melatonin wind-down window from logged habits, and correlates daily energy ratings against accumulated sleep debt.",
-        "Implemented a freemium model with Stripe subscription billing (checkout, webhooks, and billing portal) over a Supabase Postgres backend with authentication and SQL migrations.",
-        "Shipped a companion Expo / React Native mobile app with automated over-the-air deployments via an EAS Update GitHub Actions pipeline triggered on each push.",
-      ],
-      tags: ["SWE", "Biomedical"],
-      demo: "https://habits-zeta-nine.vercel.app/",
-      repo: "https://github.com/s3raphsembrace/habits",
-    },
-    {
-      name: "Sprout",
-      impact: "AI recovery-support app with encrypted health data, pitched to a panel of healthcare judges.",
-      stack: "React · Vite · Node.js · Express · PostgreSQL · OpenAI API",
-      context: "Healthcare Innovation Challenge 2026",
-      bullets: [
-        "Built an AI-driven web app converting daily mood check-ins and journal entries into personalized recovery micro-tasks for users with substance use disorder via the OpenAI API.",
-        "Implemented JWT auth, row-level data security, and a real-time relapse-risk classification pipeline; presented to a panel of healthcare judges.",
-      ],
-      tags: ["SWE", "AI/ML", "Biomedical"],
-      pdf: "/projects/sprout.pdf",
-      repo: "https://github.com/env1ou5/rehabilitatetomodachi2",
-    },
-    {
-      name: "Surgical Hand-Tracking Robotic Arm",
-      impact: "Hands-free robotic control from webcam hand tracking, with per-joint safety validation.",
-      stack: "Fusion 360 · Arduino · C++ · Python · MediaPipe",
-      context: "Emergent Biodesign 2026",
-      bullets: [
-        "Built a Python vision-control pipeline (MediaPipe) mapping real-time hand pose to Braccio arm joint angles and gripper commands, with a dual-hand reset trigger to minimize noise.",
-        "Programmed Arduino firmware in C++ with per-joint safety validation and incremental 3° motion steps — preserving continuous surgeon judgment in the control loop.",
-      ],
-      tags: ["Hardware", "AI/ML", "Biomedical"],
-      pdf: "/projects/braccio-arm.pdf",
-      repo: "https://github.com/s3raphsembrace/mediapipe-braccio-control",
-      demo: "/demo/braccio",
-    },
-    {
-      name: "Mon Sillage",
-      impact: "AI fragrance recommender with a circular-packaging model, presented at L'Oréal Brandstorm.",
-      stack: "Next.js · React · Tailwind CSS · Google Gemini API",
-      context: "L'Oréal Brandstorm 2026",
-      bullets: [
-        "Developed an AI-powered fragrance recommendation app integrating Gemini API to analyze outfit images, weather, and preferences for scent and application guidance.",
-        "Designed a multi-step discovery journey and proposed a circular refillable-vessel model using PCR glass (−30% CO₂), aligned with L'Oréal's 2030 sustainability goals.",
-      ],
-      tags: ["SWE", "AI/ML"],
-      pdf: "/projects/mon-sillage.pdf",
-      repo: "https://github.com/s3raphsembrace/mon-sillage",
-      demo: "https://mon-sillage.vercel.app/",
-    },
-    {
-      name: "AI for Energy Conservation — Research Portfolio",
-      impact: "Research assessing where AI genuinely reduces energy demand versus adds to it.",
-      stack: "Research Writing · Energy Policy · Sustainability Analysis",
-      context: "WRT 102 Portfolio · Stony Brook University",
-      bullets: [
-        "Authored a research-based argumentative paper evaluating whether AI can reduce net environmental harm — analyzing AI's role in cutting global energy consumption, siting and scaling renewable sources such as offshore wind, and improving energy-plant efficiency.",
-        "Assessed real siting constraints for renewable installations, including average wind speeds, geotechnical foundation conditions, coastal biodiversity impact, and project economics, using peer-reviewed engineering and environmental sources.",
-      ],
-      tags: ["Energy", "Research", "AI/ML"],
-      pdf: "/projects/wrt-energy-ai-portfolio.pdf",
-      pdfLabel: "Portfolio",
-    },
-    {
-      name: "Probiotic Neoantigen Delivery for Cancer Immunotherapy",
-      impact: "Engineered a probiotic delivery route for tumor neoantigens, grounded in Nature literature.",
-      stack: "Synthetic Biology · Recombinant DNA Design · SnapGene",
-      context: "BME 304 / BME 300 · Stony Brook University",
-      bullets: [
-        "Investigated engineering probiotic E. coli Nissle 1917 within the gut microbiome to deliver tumor-specific neoantigens and enhance cancer immunotherapy outcomes, working in a team of six.",
-        "Modeled recombinant plasmid construction incorporating tumor-targeting vectors, a pBAD inducible promoter, and listeriolysin O sequences; authored an accompanying critical analysis grounded in peer-reviewed Nature literature.",
-      ],
-      tags: ["Biomedical", "Research"],
-      pdf: "/projects/neoantigen-presentation.pdf",
-      extra: { label: "Paper", href: "/projects/neoantigen-critical-analysis.pdf" },
-    },
-    {
-      name: "Acidosis & Bone Mechanical Strength Study",
-      impact: "Measured a statistically significant 15% drop in bone force-to-failure (p = 0.009).",
-      stack: "INSTRON UTM · IBM SPSS · Statistical Analysis",
-      context: "BME 212 · Stony Brook University",
-      bullets: [
-        "Designed and executed an ex vivo three-point bending study on 20 matched-pair specimens to quantify how acidic pH affects bone structural integrity, conducting a power analysis to justify sample size.",
-        "Applied paired t-test analysis in IBM SPSS to establish a statistically significant 15% reduction in force-to-failure (p = 0.009); documented methodology and findings in a formal paper and group presentation.",
-      ],
-      tags: ["Biomedical", "Research"],
-      pdf: "/projects/bone-acidosis-paper.pdf",
-      pdfLabel: "Paper",
-      extra: { label: "Slides", href: "/projects/bone-acidosis-presentation.pdf" },
-    },
-    {
-      name: "Mechanical Gear-Driven Treat Dispenser",
-      impact: "Accessible one-push dispenser for users with limited hand mobility, toleranced to 0.15 mm.",
-      stack: "Fusion 360 · AutoCAD · GD&T · Parametric Modeling",
-      context: "Emergent Biodesign · Stony Brook University",
-      bullets: [
-        "Led a 5-person team designing an accessible gear-based dispensing mechanism for wheelchair users with limited hand mobility, applying kinematic calculations to specify pitch diameter (4.0 in), diametral pitch (6), and tooth count (24).",
-        "Produced annotated orthographic and assembly drawings, ran interference analysis to catch gear-to-wall collisions, and applied offset face tolerancing to establish a 0.15 mm clearance fit at the axle interface.",
-      ],
-      tags: ["Hardware", "Biomedical"],
-      pdf: "/projects/dog-treat-dispenser.pdf",
-    },
-    {
-      name: "Narcolepsy Monitoring Headband",
-      impact: "Wearable EEG concept for pediatric narcolepsy, co-designed with a fine arts student.",
-      stack: "Fusion 360 · AutoCAD · EEG Concept Design",
-      context: "ART × BME Interdisciplinary Design 2026",
-      bullets: [
-        "Collaborated with a fine arts student to prototype a wearable EEG-based pediatric narcolepsy monitoring headband in Fusion 360, iterating on a non-circular 20 cm profile to resolve sizing and geometry failures across print cycles.",
-        "Proposed integration of EEG electrodes, signal amplifiers, Bluetooth modules, and onboard storage for real-time brainwave monitoring and wireless transmission to a caregiver companion app.",
-      ],
-      tags: ["Hardware", "Biomedical"],
-      pdf: "/projects/narcolepsy-headband.pdf",
-    },
-    {
-      name: "Noninvasive Heart Rate Sensor",
-      impact: "Led a 7-person team to a working wearable prototype; won Best Presentation.",
-      stack: "C++ · Arduino · Fusion 360",
-      context: "Stony Brook University",
-      bullets: [
-        "Directed a 7-person team through iterative design and prototyping of a wearable sensor; earned Best Presentation Award for exceptional technical communication.",
-      ],
-      tags: ["Hardware", "Biomedical"],
-      pdf: "/projects/heart-rate-sensor.pdf",
-      demo: "https://you.stonybrook.edu/heartratesensor/the-topic-and-goal/",
-    },
-  ];
+  {
+    name: "Habits \u2014 Sleep Quality Tracker",
+    impact: "A live, revenue-ready product: Stripe billing, Supabase backend, and a React Native app.",
+    stack: "Next.js \u00b7 TypeScript \u00b7 Supabase \u00b7 Stripe \u00b7 Expo (React Native) \u00b7 CSS",
+    context: "Personal Project",
+    bullets: [
+      "Built a full-stack sleep-wellness app that quantifies sleep debt on a rolling 14-day ledger, estimates a personalized melatonin wind-down window from logged habits, and correlates daily energy ratings against accumulated debt.",
+      "Implemented a freemium model with Stripe subscription billing (checkout, webhooks, and billing portal) over a Supabase Postgres backend with authentication and SQL migrations.",
+      "Shipped a companion Expo / React Native mobile app with automated over-the-air deployments via an EAS Update GitHub Actions pipeline triggered on each push.",
+    ],
+    tags: ["SWE", "Biomedical"],
+    demo: "https://habits-zeta-nine.vercel.app/",
+    repo: "https://github.com/s3raphsembrace/habits",
+  },
+  {
+    name: "Multi-Modal Evidence Review",
+    impact: "Placed #85 of 1,773 by cutting per-claim cost to ~$0.001 with a two-stage vision pipeline.",
+    stack: "Gemini API SDK \u00b7 PyYAML \u00b7 Pillow \u00b7 tenacity \u00b7 tqdm",
+    context: "HackerRank Orchestrate 2026 \u00b7 #85 / 1773",
+    bullets: [
+      "Built a two-stage multimodal pipeline (Google Gemini vision) to adjudicate insurance-style damage claims across cars, laptops, and packages, classifying image evidence as supporting, contradicting, or insufficient.",
+      "Designed a cheap Stage-1 validity gate (Flash-Lite) that screens for blur, wrong-object, and quality issues before triggering expensive Stage-2 analysis, cutting cost to ~$0.001/claim while improving flag reliability.",
+      "Engineered object-specific prompts with injected evidence rubrics and user-history risk context, plus a closed-vocabulary normalizer and evaluation harness (macro-F1, confusion matrix) scored against labeled data.",
+    ],
+    tags: ["AI/ML", "SWE"],
+    repo: "https://github.com/s3raphsembrace/orchestrate",
+  },
+  {
+    name: "Sprout",
+    impact: "AI recovery-support app with encrypted health data, pitched to a panel of healthcare judges.",
+    stack: "React \u00b7 Vite \u00b7 Node.js \u00b7 Express \u00b7 PostgreSQL \u00b7 OpenAI",
+    context: "Healthcare Innovation Challenge 2026",
+    bullets: [
+      "Built a full-stack web app using AI to personalize daily recovery micro-tasks for users with substance use disorder, converting mood check-ins and journal entries into actionable interventions via the OpenAI API.",
+      "Designed a relapse-risk classification system that analyzes mood, cravings, sleep quality, and journal sentiment in real time to surface targeted recovery actions.",
+      "Implemented JWT-based authentication and a RESTful Express/PostgreSQL backend with row-level data security to protect sensitive health information.",
+      "Presented to a panel of healthcare judges, competing on feasibility, scientific rigor, and public health impact.",
+    ],
+    tags: ["SWE", "AI/ML", "Biomedical"],
+    pdf: "/projects/sprout.pdf",
+    repo: "https://github.com/env1ou5/rehabilitatetomodachi2",
+  },
+  {
+    name: "Mon Sillage",
+    impact: "AI fragrance recommender with a circular-packaging model, presented at L\u2019Or\u00e9al Brandstorm.",
+    stack: "Next.js \u00b7 React \u00b7 Tailwind CSS \u00b7 Google Gemini API",
+    context: "L\u2019Or\u00e9al Brandstorm 2026",
+    bullets: [
+      "Developed an AI-powered personalized fragrance recommendation web app integrating the Google Gemini API to analyze user outfit images, local weather, and personal preferences, delivering scent recommendations and application guidance.",
+      "Designed a multi-step discovery journey \u2014 location, climate, personality, and sillage inputs \u2014 using Next.js and Tailwind CSS to deliver a premium, bespoke digital consultation experience.",
+      "Conceptualized a circular business model featuring refillable aluminum-shell fragrance vessels and a seasonal scent cadence using PCR glass (reducing CO\u2082 up to 30%), aligning with L\u2019Or\u00e9al\u2019s 2030 sustainability goals.",
+      "Presented product strategy and tech architecture to panel judges, positioning Savoir-Faire as a \u201cbeauty tech\u201d brand combining AI-driven personalization with sustainability-first hardware design.",
+    ],
+    tags: ["SWE", "AI/ML"],
+    pdf: "/projects/mon-sillage.pdf",
+    repo: "https://github.com/s3raphsembrace/mon-sillage",
+    demo: "https://mon-sillage.vercel.app/",
+  },
+  {
+    name: "Guitarverse",
+    impact: "Real-time pitch detection and 3D tab rendering in the browser, shipped at a hackathon.",
+    stack: "Next.js \u00b7 MongoDB \u00b7 Docker \u00b7 NextAuth \u00b7 Demucs \u00b7 basic-pitch",
+    context: "HopperHacks WiCS 2026",
+    bullets: [
+      "Built a gamified, full-stack guitar practice platform with real-time pitch detection, MIDI file import, and 3D tab visualization using Three.js and React Three Fiber, enabling users to practice along with animated guitar notation.",
+      "Implemented real-time audio processing using the Web Audio API and basic-pitch for pitch accuracy feedback; integrated Demucs for audio stem separation via a Dockerized Python backend, enabling dependency-free client-side usage.",
+      "Developed user authentication (NextAuth), profile management, campaign modes, and a competitive leaderboard using MongoDB, fostering a social and structured practice ecosystem.",
+      "Containerized the audio import service with Docker \u2014 pre-warming the Demucs model at startup and caching checkpoints in a persistent volume \u2014 to eliminate manual dependency installation for contributors.",
+    ],
+    tags: ["SWE"],
+    repo: "https://github.com/aycow/guitar_site",
+    demo: "https://guitar-site-zeta.vercel.app",
+  },
+  {
+    name: "Surgical Application Hand-Tracking Robotic Arm",
+    impact: "Hands-free robotic control from webcam hand tracking, with per-joint safety validation.",
+    stack: "Fusion 360 \u00b7 Arduino \u00b7 C++ \u00b7 Python \u00b7 MediaPipe",
+    context: "Emergent Biodesign 2026",
+    bullets: [
+      "Designed and 3D printed custom human-finger-inspired gripper modules in Fusion 360 and Meshmixer, resolving repeated print failures caused by filament instability and structural fracturing through iterative redesign.",
+      "Programmed Arduino firmware in C++ to initialize the Braccio arm to a calibrated safe position, parse six-joint angle commands from serial input, validate each value against a safety table, and execute incremental 3\u00b0 motion steps with inter-step delays to prevent mechanical strain.",
+      "Built a Python vision-control pipeline using MediaPipe to capture real-time webcam feed, identify bilateral hand landmarks, and map right-hand pose to arm joint angles and left-hand pose to gripper open/close commands.",
+      "Benchmarked design against four existing control paradigms; differentiated solution by eliminating pre-programmed motion sequences and preserving continuous surgeon judgment in the control loop.",
+      "Delivered a 10-minute live in-class demonstration of real-time surgical tool grasping, arm calibration, and safe reset; presented circuit schematics, firmware architecture, and vision pipeline to peer and faculty reviewers.",
+    ],
+    tags: ["Hardware", "AI/ML", "Biomedical"],
+    pdf: "/projects/braccio-arm.pdf",
+    repo: "https://github.com/s3raphsembrace/mediapipe-braccio-control",
+    demo: "/demo/braccio",
+  },
+  {
+    name: "Dog Treat Dispenser",
+    impact: "Accessible one-push dispenser for users with limited hand mobility, toleranced to 0.15 mm.",
+    stack: "Fusion 360 \u00b7 AutoCAD",
+    context: "Emergent Biodesign, Spring 2026",
+    bullets: [
+      "Designed a spur gear-based dispensing mechanism for wheelchair users with limited hand mobility, applying kinematic calculations to determine pitch diameter (4.0 in), diametral pitch (6), and tooth count (24).",
+      "Produced annotated orthographic projections, assembly drawings, and motion simulations in Fusion 360; applied interference analysis to identify collisions and used offset face tolerancing to establish a 0.15 mm clearance fit.",
+      "Ran parametric modeling with driven dimensions to dynamically link treat size constraints to gear geometry, enabling automatic recalculation of housing clearances when design parameters changed.",
+    ],
+    tags: ["Hardware", "Biomedical"],
+    pdf: "/projects/dog-treat-dispenser.pdf",
+  },
+  {
+    name: "AI & The Environment Research Paper",
+    impact: "Research assessing where AI genuinely reduces energy demand versus where it adds to it.",
+    stack: "Research Writing \u00b7 Energy Policy \u00b7 Sustainability Analysis",
+    context: "Intermediate Writing (WRT 102), Spring 2025",
+    bullets: [
+      "Authored a research-based argumentative paper evaluating whether artificial intelligence can reduce net environmental harm, weighing the energy cost of AI runtime against its capacity to cut global consumption.",
+      "Analyzed AI\u2019s role in siting and scaling renewable energy \u2014 including offshore wind capacity assessment \u2014 and in operating energy plants more efficiently, drawing on peer-reviewed engineering and environmental sources.",
+      "Evaluated real siting constraints for renewable installations, including average wind speeds, geotechnical foundation conditions, coastal biodiversity impact, and project economics, then peer-reviewed essays across other disciplines to refine argumentation and structure.",
+    ],
+    tags: ["Energy", "Research", "AI/ML"],
+    pdf: "/projects/wrt-energy-ai-portfolio.pdf",
+    pdfLabel: "Portfolio",
+  },
+  {
+    name: "Principal Component Analysis Neural Network",
+    impact: "Dimensionality reduction and clustering pipeline for pattern recognition on complex datasets.",
+    stack: "Python \u00b7 NumPy \u00b7 Matplotlib \u00b7 Pandas",
+    context: "Personal Project",
+    bullets: [
+      "Interpreted datasets using advanced computational methodologies, implementing DBSCAN and K-means clustering algorithms with heat-mapping visualizations to perform pattern recognition and validate data accuracy.",
+      "Developed a Principal Component Analysis (PCA) program to streamline data interpretation and accurately isolate significant data regions.",
+    ],
+    tags: ["AI/ML", "Research"],
+  },
+  {
+    name: "Noninvasive Heart Rate Sensor",
+    impact: "Led a 7-person team to a working wearable prototype; won Best Presentation.",
+    stack: "C++ \u00b7 Arduino \u00b7 Fusion 360",
+    context: "Intro to Biomedical Engineering, Fall 2024",
+    bullets: [
+      "Authored technical documentation and delivered project presentations, earning the \u201cBest Presentation Award\u201d for exceptional communication, critical thinking, and clearly explaining the design process to non-technical audiences.",
+      "Directed a 7-person team through an iterative project lifecycle, researching hypoallergenic, cost-efficient design materials, project requirements, constraints, and product design while managing timelines.",
+      "Designed, assembled, and systematically troubleshot electronic hardware components to prototype a noninvasive wearable sensor, actively evaluating factors that impacted product performance, safety, and manufacturability.",
+    ],
+    tags: ["Hardware", "Biomedical"],
+    pdf: "/projects/heart-rate-sensor.pdf",
+    demo: "https://you.stonybrook.edu/heartratesensor/the-topic-and-goal/",
+  },
+  {
+    name: "Probiotic Neoantigen Delivery for Cancer Immunotherapy",
+    impact: "Engineered a probiotic delivery route for tumor neoantigens, grounded in Nature literature.",
+    stack: "Synthetic Biology \u00b7 Recombinant DNA Design \u00b7 SnapGene",
+    context: "BME 304 / BME 300 \u00b7 Stony Brook University",
+    bullets: [
+      "Investigated engineering probiotic E. coli Nissle 1917 within the gut microbiome to deliver tumor-specific neoantigens and enhance cancer immunotherapy outcomes, working in a team of six.",
+      "Modeled recombinant plasmid construction incorporating tumor-targeting vectors, a pBAD inducible promoter, and listeriolysin O sequences; authored an accompanying critical analysis grounded in peer-reviewed Nature literature.",
+    ],
+    tags: ["Biomedical", "Research"],
+    pdf: "/projects/neoantigen-presentation.pdf",
+    extra: { label: "Paper", href: "/projects/neoantigen-critical-analysis.pdf" },
+  },
+  {
+    name: "Acidosis & Bone Mechanical Strength Study",
+    impact: "Measured a statistically significant 15% drop in bone force-to-failure (p = 0.009).",
+    stack: "INSTRON UTM \u00b7 IBM SPSS \u00b7 Statistical Analysis",
+    context: "BME 212 \u00b7 Stony Brook University",
+    bullets: [
+      "Designed and executed an ex vivo three-point bending study on 20 matched-pair specimens to quantify how acidic pH affects bone structural integrity, conducting a power analysis to justify sample size.",
+      "Applied paired t-test analysis in IBM SPSS to establish a statistically significant 15% reduction in force-to-failure (p = 0.009); documented methodology and findings in a formal paper and group presentation.",
+    ],
+    tags: ["Biomedical", "Research"],
+    pdf: "/projects/bone-acidosis-paper.pdf",
+    pdfLabel: "Paper",
+    extra: { label: "Slides", href: "/projects/bone-acidosis-presentation.pdf" },
+  },
+  {
+    name: "Narcolepsy Monitoring Headband",
+    impact: "Wearable EEG concept for pediatric narcolepsy, co-designed with a fine arts student.",
+    stack: "Fusion 360 \u00b7 AutoCAD \u00b7 EEG Concept Design",
+    context: "ART \u00d7 BME Interdisciplinary Design 2026",
+    bullets: [
+      "Collaborated with a fine arts student to prototype a wearable EEG-based pediatric narcolepsy monitoring headband in Fusion 360, iterating on a non-circular 20 cm profile to resolve sizing and geometry failures across print cycles.",
+      "Proposed integration of EEG electrodes, signal amplifiers, Bluetooth modules, and onboard storage for real-time brainwave monitoring and wireless transmission to a caregiver companion app.",
+    ],
+    tags: ["Hardware", "Biomedical"],
+    pdf: "/projects/narcolepsy-headband.pdf",
+  },
+];
 
 const SKILLS: Record<string, string[]> = {
   "Languages": ["Python", "Java", "TypeScript", "JavaScript", "HTML5", "CSS3", "SQL", "C", "C++", "LabVIEW"],
@@ -579,16 +616,25 @@ const LEADERSHIP = [
   {
     org: "Alpha Eta Mu Beta (AEMB) Honor Society",
     role: "Website Developer, Elective Board",
-    date: "Apr 2026 – Present",
-    icon: "🏅",
-    desc: "Maintain the organization's website and social presence; design digital and print marketing materials in Canva & Adobe Express, driving increased event participation across departments.",
+    date: "Apr 2026 \u2013 Present",
+    icon: "\ud83c\udfc5",
+    logo: "/leadership/aemb.png",
+    bullets: [
+      "Designing promotional content, including digital and print flyers, to foster attendance and awareness for organizational events through weekly department emails.",
+      "Managing routine updates to the organization\u2019s website and developing social media presence, executing a regular posting schedule to ensure digital content is accurate, user-friendly, and accessible.",
+      "Utilized design tools (Canva, Adobe Express) to produce professional marketing materials for various events, driving an increase in event participation across departments.",
+    ],
   },
   {
-    org: "NYC PSAL Varsity Fencing Team",
+    org: "NYC Public School Athletic League Varsity Fencing Team",
     role: "Athletic Team Manager",
-    date: "Sep 2022 – Jul 2024",
-    icon: "🤺",
-    desc: "Directed end-to-end logistics, equipment management, and event coordination for a competitive roster of 20+ athletes across local and regional tournaments.",
+    date: "Sep 2022 \u2013 Jul 2024",
+    icon: "\ud83e\udd3a",
+    logo: "/leadership/psal.png",
+    bullets: [
+      "Directed end-to-end logistics, equipment management, scheduling, and event coordination for a competitive roster of 20+ athletes, ensuring seamless operational continuity across local and regional tournaments.",
+      "Served as the primary point of contact for team members, resolving logistical issues, relaying athletic performance feedback, and providing ongoing administrative support.",
+    ],
   },
 ];
 
@@ -1256,9 +1302,23 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-5 mb-8">
           {LEADERSHIP.map((l) => (
             <div key={l.org} className="card reveal">
-              <div className="flex items-start gap-4 mb-2">
-                <div className="w-12 h-12 rounded-xl bg-accent-soft flex items-center justify-center shrink-0 text-2xl border border-accent/20">
-                  {l.icon}
+              <div className="flex items-start gap-4 mb-3">
+                {/* Real logo when the file exists; the emoji stands in until then. */}
+                <div className="w-12 h-12 rounded-xl bg-white dark:bg-neutral-100 flex items-center justify-center shrink-0 text-2xl border border-slate-200 dark:border-neutral-600 overflow-hidden p-1">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={l.logo}
+                    alt=""
+                    aria-hidden="true"
+                    className="max-w-full max-h-full object-contain"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      img.style.display = "none";
+                      const fb = img.nextElementSibling as HTMLElement | null;
+                      if (fb) fb.style.display = "block";
+                    }}
+                  />
+                  <span aria-hidden="true" style={{ display: "none" }}>{l.icon}</span>
                 </div>
                 <div>
                   <p className="text-slate-900 dark:text-neutral-50 font-bold leading-snug">{l.org}</p>
@@ -1266,8 +1326,39 @@ export default function Home() {
                   <p className="text-slate-500 dark:text-neutral-400 text-xs">{l.date}</p>
                 </div>
               </div>
-              <p className="text-slate-600 dark:text-neutral-300 text-sm">{l.desc}</p>
+              <ul className="space-y-1.5">
+                {l.bullets.map((b, i) => (
+                  <li key={i} className="text-slate-600 dark:text-neutral-300 text-sm flex gap-2.5">
+                    <span aria-hidden="true" className="shrink-0 mt-1.5 w-1 h-1 rounded-full bg-accent" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          ))}
+        </div>
+        {/* Verified credentials link out; everything else is a plain chip. */}
+        <div className="reveal flex flex-wrap gap-2 mb-3">
+          {[
+            {
+              label: "McKinsey Forward Program",
+              href: "https://www.credly.com/badges/e884f382-6142-4b8d-bdb2-2528d7e5800c",
+            },
+            {
+              label: "Project Destined Certificate",
+              href: "https://certificates.projectdestined.com/credentials/1425608d-a330-4131-b53a-867041192574?recipient=true",
+            },
+          ].map((c) => (
+            <a
+              key={c.label}
+              href={c.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-accent bg-accent-soft/60 border border-accent/25 px-3 py-1.5 rounded-full hover:bg-accent hover:text-white dark:hover:text-neutral-900 transition-colors"
+            >
+              {c.label}
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+            </a>
           ))}
         </div>
         <div className="reveal flex flex-wrap gap-2">
