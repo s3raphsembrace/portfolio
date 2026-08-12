@@ -124,6 +124,9 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
       metalness: 0,
       clearcoat: 1,
       side: THREE.DoubleSide,
+      // Transparent shells must not write depth or they hide the chamber
+      // array sitting inside/below them.
+      depthWrite: false,
     });
     const disc = new THREE.Mesh(
       new THREE.CylinderGeometry(R, R, THICK, 96),
@@ -156,6 +159,7 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
         opacity: 0.34,
         roughness: 0.9,
         side: THREE.DoubleSide,
+        depthWrite: false,
       })
     );
     membrane.position.y = 0.55;
@@ -168,14 +172,12 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
     const ROWS = 18;
     const HALF_W = 5.9;   // array half-width  (x)
     const HALF_D = 4.5;   // array half-depth  (z)
-    const chamberGeo = new THREE.BoxGeometry(0.24, 0.3, 0.16);
+    const chamberGeo = new THREE.BoxGeometry(0.3, 0.34, 0.22);
     const chamberMat = new THREE.MeshStandardMaterial({
       color: ACCENT,
       emissive: ACCENT,
-      emissiveIntensity: 0.15,
-      roughness: 0.4,
-      transparent: true,
-      opacity: 0.8,
+      emissiveIntensity: 0.35,
+      roughness: 0.35,
     });
     const chambers = new THREE.InstancedMesh(chamberGeo, chamberMat, COLS * ROWS);
     chambers.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -186,7 +188,7 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
       for (let r = 0; r < ROWS; r++) {
         const x = -HALF_W + (c / (COLS - 1)) * HALF_W * 2;
         const z = -HALF_D + (r / (ROWS - 1)) * HALF_D * 2;
-        dummy.position.set(x, 0.3, z);
+        dummy.position.set(x, 0.36, z);
         dummy.updateMatrix();
         chambers.setMatrixAt(i, dummy.matrix);
         chambers.setColorAt(i, new THREE.Color(ACCENT));
@@ -195,6 +197,7 @@ export default function MicrofluidicChip({ dark = false }: { dark?: boolean }) {
       }
     }
     chambers.instanceMatrix.needsUpdate = true;
+    chambers.renderOrder = 1;
     chambers.userData.partId = "chambers";
     pickable.push(chambers as unknown as THREE.Mesh);
     group.add(chambers);

@@ -1303,8 +1303,10 @@ export default function Home() {
           {LEADERSHIP.map((l) => (
             <div key={l.org} className="card reveal">
               <div className="flex items-start gap-4 mb-3">
-                {/* Real logo when the file exists; the emoji stands in until then. */}
-                <div className="w-12 h-12 rounded-xl bg-white dark:bg-neutral-100 flex items-center justify-center shrink-0 text-2xl border border-slate-200 dark:border-neutral-600 overflow-hidden p-1">
+                {/* Fixed height, flexible width so square seals and wide
+                    wordmarks both render at a legible size. Falls back to the
+                    emoji if the logo file is missing. */}
+                <div className="h-12 min-w-12 max-w-[132px] rounded-xl bg-white dark:bg-neutral-100 flex items-center justify-center shrink-0 text-2xl border border-slate-200 dark:border-neutral-600 overflow-hidden px-2 py-1">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={l.logo}
